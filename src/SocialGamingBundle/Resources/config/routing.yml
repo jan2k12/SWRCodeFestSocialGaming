@@ -1,0 +1,3 @@
+social_gaming_homepage:
+    path:     /
+    defaults: { _controller: SocialGamingBundle:Default:index }
