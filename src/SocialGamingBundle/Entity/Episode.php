@@ -214,4 +214,3 @@ class Episode
         return $this->user;
     }
 }
-

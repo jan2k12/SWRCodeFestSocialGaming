@@ -33,7 +33,7 @@ SocialGamingBundle\Entity\User:
             column: isActive
         userSuspectId:
             type: integer
-            nullable: false
+            nullable: true
             options:
                 unsigned: false
             column: user_suspect_id

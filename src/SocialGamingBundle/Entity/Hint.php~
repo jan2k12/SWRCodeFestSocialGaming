@@ -110,3 +110,4 @@ class Hint
         return $this->episode;
     }
 }
+

@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`user` (
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `isActive` TINYINT(4) NULL,
-  `user_suspect_id` INT NOT NULL,
+  `user_suspect_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB

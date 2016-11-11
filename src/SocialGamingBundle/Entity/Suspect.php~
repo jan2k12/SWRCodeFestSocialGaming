@@ -185,3 +185,4 @@ class Suspect
         return $this->user;
     }
 }
+

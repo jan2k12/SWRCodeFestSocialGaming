@@ -3,9 +3,9 @@
 namespace SocialGamingBundle\Entity;
 
 /**
- * Suspect
+ * Episode
  */
-class Suspect
+class Episode
 {
     /**
      * @var integer
@@ -18,19 +18,24 @@ class Suspect
     private $name;
 
     /**
-     * @var boolean
+     * @var \DateTime
      */
-    private $guilty;
+    private $startdate = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var \DateTime
+     */
+    private $enddate = 'CURRENT_TIMESTAMP';
 
     /**
      * @var string
      */
-    private $imagepath;
+    private $summary;
 
     /**
-     * @var \SocialGamingBundle\Entity\Episode
+     * @var \SocialGamingBundle\Entity\Show
      */
-    private $episode;
+    private $show;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -60,7 +65,7 @@ class Suspect
      *
      * @param string $name
      *
-     * @return Suspect
+     * @return Episode
      */
     public function setName($name)
     {
@@ -80,75 +85,99 @@ class Suspect
     }
 
     /**
-     * Set guilty
+     * Set startdate
      *
-     * @param boolean $guilty
+     * @param \DateTime $startdate
      *
-     * @return Suspect
+     * @return Episode
      */
-    public function setGuilty($guilty)
+    public function setStartdate($startdate)
     {
-        $this->guilty = $guilty;
+        $this->startdate = $startdate;
 
         return $this;
     }
 
     /**
-     * Get guilty
+     * Get startdate
      *
-     * @return boolean
+     * @return \DateTime
      */
-    public function getGuilty()
+    public function getStartdate()
     {
-        return $this->guilty;
+        return $this->startdate;
     }
 
     /**
-     * Set imagepath
+     * Set enddate
      *
-     * @param string $imagepath
+     * @param \DateTime $enddate
      *
-     * @return Suspect
+     * @return Episode
      */
-    public function setImagepath($imagepath)
+    public function setEnddate($enddate)
     {
-        $this->imagepath = $imagepath;
+        $this->enddate = $enddate;
 
         return $this;
     }
 
     /**
-     * Get imagepath
+     * Get enddate
+     *
+     * @return \DateTime
+     */
+    public function getEnddate()
+    {
+        return $this->enddate;
+    }
+
+    /**
+     * Set summary
+     *
+     * @param string $summary
+     *
+     * @return Episode
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * Get summary
      *
      * @return string
      */
-    public function getImagepath()
+    public function getSummary()
     {
-        return $this->imagepath;
+        return $this->summary;
     }
 
     /**
-     * Set episode
+     * Set show
      *
-     * @param \SocialGamingBundle\Entity\Episode $episode
+     * @param \SocialGamingBundle\Entity\Show $show
      *
-     * @return Suspect
+     * @return Episode
      */
-    public function setEpisode(\SocialGamingBundle\Entity\Episode $episode = null)
+    public function setShow(\SocialGamingBundle\Entity\Show $show = null)
     {
-        $this->episode = $episode;
+        $this->show = $show;
 
         return $this;
     }
 
     /**
-     * Get episode
+     * Get show
      *
-     * @return \SocialGamingBundle\Entity\Episode
+     * @return \SocialGamingBundle\Entity\Show
      */
-    public function getEpisode()
+    public function getShow()
     {
-        return $this->episode;
+        return $this->show;
     }
 
     /**
@@ -156,7 +185,7 @@ class Suspect
      *
      * @param \SocialGamingBundle\Entity\User $user
      *
-     * @return Suspect
+     * @return Episode
      */
     public function addUser(\SocialGamingBundle\Entity\User $user)
     {
@@ -185,3 +214,4 @@ class Suspect
         return $this->user;
     }
 }
+
