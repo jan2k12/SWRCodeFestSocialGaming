@@ -8,6 +8,7 @@
 
 namespace SocialGamingBundle\Controller;
 
+use SocialGamingBundle\Entity\Show;
 use SocialGamingBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -32,18 +33,40 @@ class AdminController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $errors=array();
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $user = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            return $this->render('SocialGamingBundle:Admin:Admin.html.twig',array('userForm'=>$userForm->createView(),'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Admin:user.html.twig',array('userForm'=>$userForm->createView(),'errors'=>$errors));
         }
 
-        return $this->render('SocialGamingBundle:Admin:Admin.html.twig',array('userForm'=>$userForm->createView()));
+        return $this->render('SocialGamingBundle:Admin:user.html.twig',array('userForm'=>$userForm->createView()));
 
     }
+
+    public function createShow(Request $request){
+        $show=new Show();
+        $showForm=$this->createFormBuilder($show)
+            ->add('name',TextType::class)
+            ->getForm();
+
+
+        $form=$showForm->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $errors=array();
+            $show = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($show);
+            $em->flush();
+
+            return $this->render('SocialGamingBundle:Admin:show.html.twig',array('showForm'=>$showForm->createView(),'errors'=>$errors));
+        }
+
+        return $this->render('SocialGamingBundle:Admin:show.html.twig',array('showForm'=>$showForm->createView()));
+    }
+
 }
