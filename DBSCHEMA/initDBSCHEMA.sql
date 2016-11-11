@@ -121,12 +121,13 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `socialgaming`.`note`
+-- Table `socialgaming`.`user_note`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socialgaming`.`note` (
+CREATE TABLE IF NOT EXISTS `socialgaming`.`user_note` (
   `user_id` INT NOT NULL,
   `episode_id` INT NOT NULL,
   `text` TEXT NULL,
+  `score` INT NULL,
   PRIMARY KEY (`user_id`, `episode_id`),
   INDEX `fk_user_has_episode_episode1_idx` (`episode_id` ASC),
   INDEX `fk_user_has_episode_user1_idx` (`user_id` ASC),
@@ -142,29 +143,6 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`note` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `socialgaming`.`score`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socialgaming`.`score` (
-  `episode_id` INT NOT NULL,
-  `user_id` INT NOT NULL,
-  `score` INT NOT NULL,
-  PRIMARY KEY (`episode_id`, `user_id`),
-  INDEX `fk_episode_has_user_user1_idx` (`user_id` ASC),
-  INDEX `fk_episode_has_user_episode1_idx` (`episode_id` ASC),
-  CONSTRAINT `fk_episode_has_user_episode1`
-    FOREIGN KEY (`episode_id`)
-    REFERENCES `socialgaming`.`episode` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_episode_has_user_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `socialgaming`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
