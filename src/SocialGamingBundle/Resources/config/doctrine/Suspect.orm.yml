@@ -1,0 +1,54 @@
+SocialGamingBundle\Entity\Suspect:
+    type: entity
+    table: suspect
+    indexes:
+        fk_suspect_episode1_idx:
+            columns:
+                - episode_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        guilty:
+            type: boolean
+            nullable: false
+        imagepath:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+            column: imagePath
+    manyToOne:
+        episode:
+            targetEntity: Episode
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                episode_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        user:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: suspect
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

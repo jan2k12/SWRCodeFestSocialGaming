@@ -1,0 +1,75 @@
+SocialGamingBundle\Entity\User:
+    type: entity
+    table: user
+    uniqueConstraints:
+        email_UNIQUE:
+            columns:
+                - email
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        username:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        isactive:
+            type: boolean
+            nullable: true
+            column: isActive
+        userSuspectId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: user_suspect_id
+    manyToMany:
+        suspect:
+            targetEntity: Suspect
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: user
+            joinTable:
+                name: user_has_suspect
+                joinColumns:
+                    -
+                        name: user_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: suspect_id
+                        referencedColumnName: id
+            orderBy: null
+        episode:
+            targetEntity: Episode
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: user
+            joinTable:
+                name: user_note
+                joinColumns:
+                    -
+                        name: user_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: episode_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

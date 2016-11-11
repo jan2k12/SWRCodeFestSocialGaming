@@ -1,0 +1,40 @@
+SocialGamingBundle\Entity\Hint:
+    type: entity
+    table: hint
+    indexes:
+        fk_hint_episode1_idx:
+            columns:
+                - episode_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        text:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        date:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+    manyToOne:
+        episode:
+            targetEntity: Episode
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                episode_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
