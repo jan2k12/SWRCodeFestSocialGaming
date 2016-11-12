@@ -163,7 +163,12 @@ class FrontendController extends Controller
     }
 
     public function highscoreAction($userId=null){
-
-            return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array());
+        return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array());
+    }
+    public function info_1Action(){
+        return $this->render('SocialGamingBundle:Frontend:info_1.html.twig',array());
+    }
+    public function info_2Action(){
+        return $this->render('SocialGamingBundle:Frontend:info_2.html.twig',array());
     }
 }

@@ -47,6 +47,12 @@ social_gaming_frontend_episode:
 social_gaming_frontend_highscore:
         path: /highscore/user/{userId}
         defaults: { _controller: SocialGamingBundle:Frontend:highscore }
+social_gaming_frontend_info_1:
+        path: /frontend/info_1
+        defaults: { _controller: SocialGamingBundle:Frontend:info_1 }
+social_gaming_frontend_info_2:
+        path: /frontend/info_2
+        defaults: { _controller: SocialGamingBundle:Frontend:info_2 }
 
 #ANDROID
 
