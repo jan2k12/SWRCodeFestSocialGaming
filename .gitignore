@@ -12,3 +12,5 @@ var/sessions/.gitkeep
 /phpunit.xml
 .idea
 .idea/*
+web/public/img
+web/public/img/*
