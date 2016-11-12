@@ -42,6 +42,7 @@ social_gaming_frontend_episode:
         path: /episode/view/{episodeId}
         defaults: { _controller: SocialGamingBundle:Frontend:episodeView }
 
+
 #ANDROID
 
 social_gaming_android_getHints:
