@@ -5,11 +5,18 @@
 
 body {
     background-color: #464646;
+    font-family: 'Open Sans', sans-serif;
 }
 
 
+.app_title {
+    font-family: 'Fredoka One', cursive;
+    font-weight: bold;
+}
+
 .highlighted-content {
     background-color: #292929;
+    font-family: 'Fredoka One', cursive;
 }
 
 .hintwindow_expanded {
