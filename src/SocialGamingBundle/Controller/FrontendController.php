@@ -22,12 +22,15 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class FrontendController extends Controller
 {
     public function indexAction(){
-
         $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
         return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows));
     }
 
 
+    public function startFrontAction(){
+        $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
+        return $this->render('SocialGamingBundle:Frontend:startFront.html.twig',array('shows'=>$actuatlTvShows));
+    }
     public function episodesViewAction($showId){
         $episodes=$this->getDoctrine()->getEntityManager()->createQuery('SELECT e from SocialGamingBundle:Episode as e where e.show=:showid')->setParameter('showid',$showId)->getResult();
         return $this->render('SocialGamingBundle:Frontend:episodes.html.twig',array('episodes'=>$episodes));
