@@ -2,25 +2,41 @@
     cursor: pointer;
     font-weight: bold;
 }
-body{
+
+body {
     background-color: #464646;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.highlighted_content {
+
+.app_title {
+    font-family: 'Fredoka One', cursive;
+    font-weight: bold;
+}
+
+.highlighted-content {
     background-color: #292929;
+    font-family: 'Fredoka One', cursive;
 }
 
-.hint_window_expandable {
+.hintwindow_expanded {
     background-color: #323232;
 }
-.border_selected_murderer {
-    background-color: #f22626;
+
+.selected_murderer {
+    border: 2px solid #f22626;
 }
 
-Hervorhebungen:
-Hinweisfenster (ausklappbar):
-Rahmen ausgewählter Mörder:
-Notitzfeld: #b6b6b6
-Text Notitzfeld: #292929
-Overlay Fotos: #000000  Transparency 66%
-Overlay Pop-Up: #292929  Transparency 63%
+.note_textarea {
+    background-color: #b6b6b6;
+    color:#292929;
+}
+
+.overlay_image {
+    background-color: hsla(0, 0%, 0%, 0.66);
+}
+
+.overlay_popup{
+    hsla(0, 0%, 16%, 0.63);
+}
+>>>>>>> master
