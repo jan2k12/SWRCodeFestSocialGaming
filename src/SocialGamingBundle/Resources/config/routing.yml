@@ -38,9 +38,17 @@ social_gaming_frontend_suspect:
 social_gaming_frontend_impressum:
         path: /frontend/impressum
         defaults: { _controller: SocialGamingBundle:Frontend:impressum }
+social_gaming_frontend_episodes:
+        path: /episodes/view/{showId}
+        defaults: { _controller: SocialGamingBundle:Frontend:episodesView }
+social_gaming_frontend_episode:
+        path: /episode/view/{episodeId}
+        defaults: { _controller: SocialGamingBundle:Frontend:episodeView }
 
 #ANDROID
 
 social_gaming_android_getHints:
         path: /android/getHints
         defaults: { _controller: SocialGamingBundle:Android:getHints }
+
+

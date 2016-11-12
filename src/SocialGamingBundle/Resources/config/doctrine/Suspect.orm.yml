@@ -42,13 +42,4 @@ SocialGamingBundle\Entity\Suspect:
                 episode_id:
                     referencedColumnName: id
             orphanRemoval: false
-    manyToMany:
-        user:
-            targetEntity: User
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: suspect
-            inversedBy: null
-            joinTable: null
-            orderBy: null
     lifecycleCallbacks: {  }

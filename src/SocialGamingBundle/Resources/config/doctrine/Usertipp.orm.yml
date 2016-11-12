@@ -1,10 +1,6 @@
-SocialGamingBundle\Entity\User:
+SocialGamingBundle\Entity\Usertipp:
     type: entity
-    table: user
-    uniqueConstraints:
-        email_UNIQUE:
-            columns:
-                - email
+    table: userTipp
     id:
         id:
             type: integer
@@ -15,20 +11,21 @@ SocialGamingBundle\Entity\User:
             generator:
                 strategy: IDENTITY
     fields:
-        username:
+        userid:
             type: string
             nullable: false
             length: 45
             options:
                 fixed: false
-        email:
+            column: userId
+        suspectid:
             type: string
             nullable: false
             length: 45
             options:
                 fixed: false
-        isactive:
-            type: boolean
-            nullable: true
-            column: isActive
+            column: suspectId
+        date:
+            type: datetime
+            nullable: false
     lifecycleCallbacks: {  }
