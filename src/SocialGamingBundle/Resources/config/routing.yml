@@ -29,6 +29,9 @@ social_gaming_frontend_startFront:
 social_gaming_frontend_result:
         path: /frontend/result
         defaults: { _controller: SocialGamingBundle:Frontend:result }
+social_gaming_frontend_info:
+        path: /frontend/info
+        defaults: { _controller: SocialGamingBundle:Frontend:info }
 social_gaming_frontend_suspect:
         path: /frontend/suspect
         defaults: { _controller: SocialGamingBundle:Frontend:suspect }

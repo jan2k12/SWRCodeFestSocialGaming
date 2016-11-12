@@ -25,7 +25,9 @@ class FrontendController extends Controller
         $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
         return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows));
     }
-
+    public  function infoAction(){
+       return $this->render('SocialGamingBundle:Frontend:info.html.twig');
+    }
 
     public function startFrontAction(){
         $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
