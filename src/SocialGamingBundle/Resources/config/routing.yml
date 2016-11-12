@@ -39,8 +39,8 @@ social_gaming_frontend_impressum:
         path: /frontend/impressum
         defaults: { _controller: SocialGamingBundle:Frontend:impressum }
 
-#ANDROID APP
+#ANDROID
 
-social_gaming_android_get_hints:
-        path: /json/android/getHints
-        defaults: { _controller: SocialGamingBundle:Android:getHints}
+social_gaming_android_getHints:
+        path: /android/getHints
+        defaults: { _controller: SocialGamingBundle:Android:getHints }
