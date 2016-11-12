@@ -2,3 +2,25 @@
     cursor: pointer;
     font-weight: bold;
 }
+body{
+    background-color: #464646;
+}
+
+.highlighted_content {
+    background-color: #292929;
+}
+
+.hint_window_expandable {
+    background-color: #323232;
+}
+.border_selected_murderer {
+    background-color: #f22626;
+}
+
+Hervorhebungen:
+Hinweisfenster (ausklappbar):
+Rahmen ausgewählter Mörder:
+Notitzfeld: #b6b6b6
+Text Notitzfeld: #292929
+Overlay Fotos: #000000  Transparency 66%
+Overlay Pop-Up: #292929  Transparency 63%
