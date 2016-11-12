@@ -14,11 +14,18 @@ var app = {
 
            window.onhashchange();
 
+            $(window).resize(function(){app.onWindowResized()});
+
+            app.onWindowResized();
+
+        },
+
+        onWindowResized: function() {
             const appTitleBarBottom = $(".app-titlebar").outerHeight();
             $("#app-menu").css({"top": appTitleBarBottom });
 
 
-            const docSize = {width: $(document).height(), height: $(document).height()- appTitleBarBottom};
+            const docSize = {width: $(document).width(), height: $(document).height()- appTitleBarBottom};
             $("#app-menu-cover-area").css({"width": docSize.width, "height": docSize.height, "top": appTitleBarBottom});
         },
 

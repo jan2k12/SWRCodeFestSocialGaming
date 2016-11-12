@@ -1,30 +1,62 @@
 <div class="row app-titlebar">
     <div class="col-md-12">
-        <img id="app-menu-icon" onclick="app.toggleMenu()" src="{{ asset('public/gfx/hamburger_menu.png') }}" /><span class="app-title">Mordsgaudi</span>
+        <img id="app-menu-icon" onclick="app.toggleMenu()" src="{{ asset('public/gfx/hamburger_menu.png') }}"/><span
+                class="app-title-text">Mordsgaudi</span>
     </div>
 </div>
 <div id="app-menu">
     <div class="app-menu-guest">
         <div class="app-menu-title-bar">GAST</div>
         <ul>
-            <li>
-                <img src="{{ asset('public/gfx/fingerabdruck.png') }}" class="menu-item-icon">
-                <a href="#/frontend/startFront">Home</a>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/startFront"><img src="{{ asset('public/gfx/fingerabdruck.png') }}"
+                                                     class="menu-item-icon">Home</a>
             </li>
-            <li>
-                <img src="{{ asset('public/gfx/pokal.png') }}" class="menu-item-icon">
-                <a href="#/frontend/highscore">Highscore</a>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/highscore"><img src="{{ asset('public/gfx/einlogge.png') }}" class="menu-item-icon">Einloggen</a>
             </li>
-            <li>
-                <img src="{{ asset('public/gfx/profile.png') }}" class="menu-item-icon">
-                <a href="#/frontend/highscore">Profil</a>
-            </li>
-            <li>
-                <img src="{{ asset('public/gfx/group.png') }}" class="menu-item-icon">
-                <a href="#/frontend/groups">Gruppen</a>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/highscore">
+                    <img src="{{ asset('public/gfx/registrieren.png') }}" class="menu-item-icon">Registrieren</a>
             </li>
             <li class="app-menu-divider"></li>
-            <li>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/highscore">
+                    <img src="{{ asset('public/gfx/pokal.png') }}" class="menu-item-icon">Highscore</a>
+            </li>
+            <li class="app-menu-divider"></li>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/impressum">Impressum</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="app-menu-user">
+        <div class="app-menu-title-bar">BARONIN VON PORZ</div>
+        <ul>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/startFront"><img src="{{ asset('public/gfx/fingerabdruck.png') }}"
+                                                     class="menu-item-icon">Home</a>
+            </li>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/highscore">
+                    <img src="{{ asset('public/gfx/pokal.png') }}" class="menu-item-icon">Highscore</a>
+            </li>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/profil">
+                    <img src="{{ asset('public/gfx/profile.png') }}" class="menu-item-icon">Profil</a>
+            </li>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/groups">
+                    <img src="{{ asset('public/gfx/group.png') }}" class="menu-item-icon">Gruppen</a>
+            </li>
+            <li class="app-menu-divider"></li>
+            <li onclick="app.toggleMenu(false)">
+                <a href="#/frontend/logout">
+                    <img src="{{ asset('public/gfx/auslogge.png') }}" class="menu-item-icon">Ausloggen</a>
+            </li>
+            <li class="app-menu-divider"></li>
+            <li onclick="app.toggleMenu(false)">
                 <a href="#/frontend/impressum">Impressum</a>
             </li>
         </ul>
