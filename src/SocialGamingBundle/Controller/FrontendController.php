@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\DateTime;
+use \PDO;
 
 class FrontendController extends Controller
 {
@@ -159,16 +160,23 @@ class FrontendController extends Controller
 
         return $this->render('SocialGamingBundle:Frontend:impressum.html.twig',array());
 
-
-    }
-
-    public function highscoreAction($userId=null){
-        return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array());
     }
     public function info_1Action(){
         return $this->render('SocialGamingBundle:Frontend:info_1.html.twig',array());
     }
-    public function info_2Action(){
-        return $this->render('SocialGamingBundle:Frontend:info_2.html.twig',array());
+    public function info_2Action()
+    {
+        return $this->render('SocialGamingBundle:Frontend:info_2.html.twig', array());
+    }
+    public function highscoreAction(){
+                $sql="SELECT SUM(score) as score, userId as id from user_score GROUP BY userid";
+                $stmt = $this->getDoctrine()->getEntityManager()->getConnection()->prepare($sql);
+                $stmt->execute();
+                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($data as $entry ){
+                    $tplData[$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find($entry['id'])->getUsername()]=$entry['score'];
+                }
+            return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array('data'=>$tplData));
+
     }
 }

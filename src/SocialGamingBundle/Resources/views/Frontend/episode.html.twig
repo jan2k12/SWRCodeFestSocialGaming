@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 suspect-img-cnt">
                 <span data-value="{{ suspect.id }}" class="clickable-suspect">
-                    <div class="suspect-overlay_text">{{ suspect.name }}</div>
+                    <div class="suspect-overlay_text" style="font-size: 1.5em">{{ suspect.name }}</div>
                     <img src="{{ asset('public/img/'~ suspect.imagepath) }}" class="img-responsive " />
                 </span>
             </div>
@@ -59,6 +59,8 @@
 {% endblock %}
 <script>
     $(document).ready(function(){
+        $('#form_save').attr('disabled','disabled').addClass('disabled').addClass('btn');
+
         $('a.accordion').click(function(){
             console.log($('#hints').attr('aria-expanded'))
             if($('#hints').attr('aria-expanded') == 'undefined' ) {
@@ -96,6 +98,7 @@
             });
             var val=$(this).data('value');
             $(this).addClass('redborder');
+            $('#form_save').removeAttr('disabled').removeClass('disabled');
             $('#form_suspectId_'+val).prop('checked',true);
         })
 

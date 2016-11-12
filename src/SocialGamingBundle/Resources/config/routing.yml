@@ -45,7 +45,7 @@ social_gaming_frontend_episode:
         path: /episode/view/{episodeId}
         defaults: { _controller: SocialGamingBundle:Frontend:episodeView }
 social_gaming_frontend_highscore:
-        path: /highscore/user/{userId}
+        path: /frontend/highscore
         defaults: { _controller: SocialGamingBundle:Frontend:highscore }
 social_gaming_frontend_info_1:
         path: /frontend/info_1
