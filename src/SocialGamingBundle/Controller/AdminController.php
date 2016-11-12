@@ -116,7 +116,6 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $errors=array();
             $episode = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($episode);
             $em->flush();

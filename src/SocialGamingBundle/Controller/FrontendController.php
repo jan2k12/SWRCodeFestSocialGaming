@@ -9,6 +9,7 @@ namespace SocialGamingBundle\Controller;
 
 
 use SocialGamingBundle\Entity\Suspect;
+use SocialGamingBundle\Model\TvShowModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,8 @@ class FrontendController extends Controller
 {
     public function indexAction(){
 
-        return $this->render('SocialGamingBundle:Frontend:index.html.twig');
+        $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
+        return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows));
     }
 
     public function startFrontAction(Request $request){
@@ -28,7 +30,6 @@ class FrontendController extends Controller
         $suspectFrontForm=$this->createFormBuilder($suspect)
             ->add('imagePath',TextType::class)
             ->add('name',TextType::class)
-            ->add('',TextType::class)
             ->getForm();
 
 

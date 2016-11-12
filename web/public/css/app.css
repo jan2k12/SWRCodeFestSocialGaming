@@ -2,3 +2,33 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+body {
+    background-color: #464646;
+}
+
+
+.highlighted-content {
+    background-color: #292929;
+}
+
+.hintwindow_expanded {
+    background-color: #323232;
+}
+
+.selected_murderer {
+    border: 2px solid #f22626;
+}
+
+.note_textarea {
+    background-color: #b6b6b6;
+    color:#292929;
+}
+
+.overlay_image {
+    background-color: hsla(0, 0%, 0%, 0.66);
+}
+
+.overlay_popup{
+    hsla(0, 0%, 16%, 0.63);
+}

@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema socialgaming
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `socialgaming` ;
 
 -- -----------------------------------------------------
 -- Schema socialgaming
@@ -17,12 +18,13 @@ USE `socialgaming` ;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`user`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`user` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `isActive` TINYINT(4) NULL,
-  `user_suspect_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
@@ -30,9 +32,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `socialgaming`.`show`
+-- Table `socialgaming`.`tvshow`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socialgaming`.`show` (
+DROP TABLE IF EXISTS `socialgaming`.`tvshow` ;
+
+CREATE TABLE IF NOT EXISTS `socialgaming`.`tvshow` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -43,10 +47,12 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`episode`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`episode` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`episode` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `startDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `startDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `endDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `summary` VARCHAR(45) NULL,
   `show_id` INT NOT NULL,
@@ -54,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`episode` (
   INDEX `fk_episode_show_idx` (`show_id` ASC),
   CONSTRAINT `fk_episode_show`
     FOREIGN KEY (`show_id`)
-    REFERENCES `socialgaming`.`show` (`id`)
+    REFERENCES `socialgaming`.`tvshow` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -63,6 +69,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`hint`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`hint` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`hint` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` TEXT NOT NULL,
@@ -81,6 +89,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`suspect`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`suspect` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`suspect` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -100,6 +110,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`user_has_suspect`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`user_has_suspect` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`user_has_suspect` (
   `user_id` INT NOT NULL,
   `suspect_id` INT NOT NULL,
@@ -123,6 +135,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`user_note`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`user_note` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`user_note` (
   `user_id` INT NOT NULL,
   `episode_id` INT NOT NULL,
