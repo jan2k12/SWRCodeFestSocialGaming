@@ -132,8 +132,7 @@ class FrontendController extends Controller
     }
 
     public function highscoreAction($userId=null){
-        if(!is_null($userId)){
-            $user=$
-        }
+
+            return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array());
     }
 }
