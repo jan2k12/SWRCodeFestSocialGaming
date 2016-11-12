@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema socialgaming
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `socialgaming` ;
 
 -- -----------------------------------------------------
 -- Schema socialgaming
@@ -17,6 +18,8 @@ USE `socialgaming` ;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`user`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`user` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
@@ -31,6 +34,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`tvshow`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`tvshow` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`tvshow` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -42,6 +47,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`episode`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`episode` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`episode` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -62,6 +69,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`hint`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`hint` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`hint` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` TEXT NOT NULL,
@@ -80,6 +89,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`suspect`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`suspect` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`suspect` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -99,6 +110,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`user_has_suspect`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`user_has_suspect` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`user_has_suspect` (
   `user_id` INT NOT NULL,
   `suspect_id` INT NOT NULL,
@@ -122,6 +135,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `socialgaming`.`user_note`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`user_note` ;
+
 CREATE TABLE IF NOT EXISTS `socialgaming`.`user_note` (
   `user_id` INT NOT NULL,
   `episode_id` INT NOT NULL,
