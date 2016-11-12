@@ -1,18 +1,98 @@
-.menuItem {
-    cursor: pointer;
-    font-weight: bold;
+#app-menu{
+    position:absolute;
+    left:0;
+    display:none;
+    z-index:1000;
+    font-size: 1.8em;
 }
+
+#app-menu-cover-area{
+    background-color: hsla(0, 0%, 0%, 0.63);
+    z-index:999;
+    display:none;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+}
+#app-menu ul {
+    list-style:none;
+    background-color: #464646;
+    padding:0;
+}
+
+.app-menu-title-bar {
+    background-color: #292929;
+    font-family: 'Fredoka One', cursive;
+    padding:10px;
+    padding-left:30px;
+
+}
+
+#app-menu a:link,
+#app-menu a:visited,
+#app-menu a:hover,
+#app-menu a:focus{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+#app-menu a:hover {
+    color: red;
+}
+
+#app-menu ul {
+    padding-bottom: 20px;
+}
+
+#app-menu li {
+    padding-right: 96px;
+    padding-left:20px;
+}
+
+#app-menu li .menu-item-icon {
+    padding:10px;
+    width: 64px;
+    height: 64px;
+}
+
+#app-menu-icon {
+    cursor: pointer;
+    width: 72px;
+    height: 72px;
+    padding: 10px;
+    vertical-align: top;
+    margin:0;
+    z-index:1000;
+}
+
+.app-menu-icon-opened {
+    background-color:#292929;
+}
+
+.app-menu-divider{
+    width:1px;
+    height:1em;
+}
+
+body, html {
+    height: 100%;
+}
+
 
 body {
     background-color: #464646;
     font-family: 'Open Sans', sans-serif;
+    color:#ffffff;
 }
 
 
 .app-title {
     font-family: 'Fredoka One', cursive;
     font-weight: bold;
-    font-size: 4em;
+    font-size: 3.5em;
     margin-left: 10px;
 }
 
@@ -43,9 +123,8 @@ body {
     text-align: center;
     opacity: 0.8;
     background-color:#c3c3c3;
-
 }
 
 .overlay_popup{
-    hsla(0, 0%, 16%, 0.63);
+hsla(0, 0%, 16%, 0.63);
 }
