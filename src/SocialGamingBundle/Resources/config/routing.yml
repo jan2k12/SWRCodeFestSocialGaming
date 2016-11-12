@@ -2,8 +2,9 @@ social_gaming_homepage:
     path:     /
     defaults: { _controller: SocialGamingBundle:Default:index }
 social_gaming_backend:
-        path: /admin
+        path: /backend
         defaults: { _controller: SocialGamingBundle:Admin:index }
+
 social_gaming_backend_create_user:
     path: /admin/user/create
     defaults: { _controller: SocialGamingBundle:Admin:createUser }
@@ -13,3 +14,10 @@ social_gaming_backend_create_show:
 social_gaming_backend_create_episode:
     path: /admin/episode/create
     defaults: { _controller: SocialGamingBundle:Admin:createEpisode }
+social_gaming_backend_create_hint:
+    path: /admin/hint/create
+    defaults: { _controller: SocialGamingBundle:Admin:createHint }
+social_gaming_backend_create_suspect:
+    path: /admin/suspect/create
+    defaults: { _controller: SocialGamingBundle:Admin:createSuspect }
+

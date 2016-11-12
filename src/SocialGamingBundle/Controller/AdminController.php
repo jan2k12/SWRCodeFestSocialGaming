@@ -9,9 +9,10 @@
 namespace SocialGamingBundle\Controller;
 
 
-use DateTimeTypeInterface;
 use SocialGamingBundle\Entity\Episode;
+use SocialGamingBundle\Entity\Hint;
 use SocialGamingBundle\Entity\Show;
+use SocialGamingBundle\Entity\Suspect;
 use SocialGamingBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,10 +34,13 @@ class AdminController extends Controller
 
         $user=new User();
         $userForm=$this->createFormBuilder($user)
-        ->add('username',TextType::class)
-        ->add('email',EmailType::class)
-        ->add('isActive',CheckboxType::class)
-        ->add('save',SubmitType::class)->getForm();
+
+        ->add('username',TextType::class, array  ('attr'=> array('class'=>'form-control' )))
+        ->add('email',EmailType::class, array  ('attr'=> array('class'=>'form-control')))
+        ->add('isActive',CheckboxType::class, array  ('attr'=> array('class'=>'form-control')))
+        ->add('save',SubmitType::class, array  ('attr'=> array('class'=>'form-control')))
+        ->getForm();
+
 
 
         $form=$userForm->handleRequest($request);
@@ -59,8 +63,9 @@ class AdminController extends Controller
     public function createShowAction(Request $request){
         $show=new Show();
         $showForm=$this->createFormBuilder($show)
-            ->add('name',TextType::class)
-            ->add('save',SubmitType::class)
+
+            ->add('name',TextType::class , array  ('attr'=> array('class'=>'form-control' )))
+            ->add('save',SubmitType::class ,array  ('attr'=> array('class'=>'form-control' )))
             ->getForm();
 
 
@@ -83,18 +88,24 @@ class AdminController extends Controller
     public function createEpisodeAction(Request $request){
         $episode=new Episode();
         $episodeForm=$this->createFormBuilder($episode)
-            ->add('name',TextType::class)
+
+            ->add('name',TextType::class ,array('attr'=> array('class'=>'form-control' )))
+            ->add('summary',TextType::class,array('attr'=> array('class'=>'form-control' )))
             ->add('startdate', DateTimeType::class,array(
                 'input'=>'timestamp',
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd'
+                'format' => 'yyyy-MM-dd HH:mm',
+                'attr'=> array('class'=>'form-control' )
             ))
             ->add('enddate', DateTimeType::class, array(
                 'input'=>'timestamp',
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd'
+                'format' => 'yyyy-MM-dd HH:mm',
+                'attr'=> array('class'=>'form-control' )
             ))
-            ->add('summary',TextType::class)
+
+            ->add('save',SubmitType::class,array('attr'=> array('class'=>'form-control' )))
+
 
             ->getForm();
 
@@ -114,5 +125,57 @@ class AdminController extends Controller
 
         return $this->render('SocialGamingBundle:Admin:episode.html.twig',array('episodeForm'=>$episodeForm->createView()));
     }
+    public function createHintAction(Request $request){
+        $hint=new Hint();
+        $hintForm=$this->createFormBuilder($hint)
+            ->add('text',TextType::class ,array('attr'=> array('class'=>'form-control' )))
+            ->add('date', DateTimeType::class,array(
+                'input'=>'timestamp',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd HH:mm:ss',
+                 'attr'=> array('class'=>'form-control' )))
+            ->add('save',SubmitType::class ,array('attr'=> array('class'=>'form-control' )))
+            ->getForm();
 
+
+        $form=$hintForm->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $errors=array();
+            $hint = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($hint);
+            $em->flush();
+
+            return $this->render('SocialGamingBundle:Admin:hint.html.twig',array('hintForm'=>$hintForm->createView(),'errors'=>$errors));
+        }
+
+        return $this->render('SocialGamingBundle:Admin:hint.html.twig',array('hintForm'=>$hintForm->createView()));
+    }
+    public function createSuspectAction(Request $request){
+        $suspect=new Suspect();
+        $suspectForm=$this->createFormBuilder($suspect)
+            ->add('name',TextType::class  ,array('attr'=> array('class'=>'form-control' )))
+            ->add('guilty',CheckboxType::class  ,array('attr'=> array('class'=>'form-control')))
+            ->add('imagepath',TextType::class  ,array('attr'=> array('class'=>'form-control' )))
+            ->add('save',SubmitType::class  ,array('attr'=> array('class'=>'form-control' )))
+            ->getForm();
+
+
+        $form=$suspectForm->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $errors=array();
+            $suspect = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($suspect);
+            $em->flush();
+
+            return $this->render('SocialGamingBundle:Admin:suspect.html.twig',array('suspectForm'=>$suspectForm->createView(),'errors'=>$errors));
+        }
+
+        return $this->render('SocialGamingBundle:Admin:suspect.html.twig',array('suspectForm'=>$suspectForm->createView()));
+    }
 }

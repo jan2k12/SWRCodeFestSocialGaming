@@ -33,6 +33,11 @@ class Hint
      *
      * @return integer
      */
+    public function __construct()
+    {
+        $this->date=time();
+    }
+
     public function getId()
     {
         return $this->id;

@@ -1,7 +1,9 @@
 social_gaming:
     resource: "@SocialGamingBundle/Resources/config/routing.yml"
     prefix:   /
-
+social_gaming:
+    resource: "@SocialGamingBundle/Resources/config/routing_frontend.yml"
+    prefix:   /
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

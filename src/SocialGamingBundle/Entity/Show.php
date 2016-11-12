@@ -3,7 +3,7 @@
 namespace SocialGamingBundle\Entity;
 
 /**
- * Show
+ * Shows
  */
 class Show
 {
