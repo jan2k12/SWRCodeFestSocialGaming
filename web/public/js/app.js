@@ -4,6 +4,7 @@
 
 var app = {
         currentHash: "",
+        isMenuVisible: false,
         init: function () {
            window.onhashchange = function(){
                if(window.location.hash.length > 0 && app.currentHash !== window.location.hash){
@@ -27,7 +28,7 @@ var app = {
             $("#app-menu").css({"top": appTitleBarBottom });
 
 
-            const docSize = {width: $(document).width(), height: $(document).height()- appTitleBarBottom};
+            const docSize = {width: $(document).width() -15, height: $(document).height()- appTitleBarBottom};
             $("#app-menu-cover-area").css({"width": docSize.width, "height": docSize.height, "top": appTitleBarBottom});
         },
 
@@ -40,17 +41,23 @@ var app = {
             if(show === true) {
                 $("#app-menu").show("blind");
                 $("#app-menu-cover-area").show("fade");
+                app.isMenuVisible = true;
             }else if(show === false){
                 $("#app-menu").hide("blind");
                 $("#app-menu-cover-area").hide("fade");
+
+                app.isMenuVisible = false;
             }else{
                 $("#app-menu").toggle("blind");
                 $("#app-menu-cover-area").toggle("fade");
+
+                app.isMenuVisible = !app.isMenuVisible;
             }
             $("#app-menu-icon").removeClass("app-menu-icon");
             $("#app-menu-icon").removeClass("app-menu-icon-opened");
 
-            $("#app-menu-icon").addClass($("#app-menu").is(":visible") ? "app-menu-icon-opened" : "app-menu-icon");
+            $("#app-menu-icon").addClass(app.isMenuVisible ? "app-menu-icon-opened" : "app-menu-icon");
+
         },
         showMenuFor: function(username){
             if(username === "guest"){

@@ -1,3 +1,8 @@
+.app-titlebar{
+    position:absolute;
+    z-index:988;
+}
+
 .app-menu-user {
     display: none;
 }
@@ -72,8 +77,6 @@
 
 #app-menu-icon {
     cursor: pointer;
-    width: 72px;
-    height: 72px;
     padding: 10px;
     vertical-align: top;
     margin:0;
@@ -111,7 +114,10 @@ h2, h3 {
     font-family: 'Fredoka One', cursive;
     font-weight: bold;
     font-size: 3.5em;
+    vertical-align:middle;
     margin-left: 20px;
+    position:relative;
+    top:5px;
 }
 
 .highlighted-content {
@@ -239,6 +245,7 @@ body, html {
 
 
 body {
+    font-size:13px;
     background-color: #464646;
     font-family: 'Open Sans', sans-serif;
     color:#ffffff;
