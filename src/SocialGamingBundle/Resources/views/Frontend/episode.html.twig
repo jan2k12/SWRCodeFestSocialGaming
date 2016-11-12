@@ -59,6 +59,8 @@
 {% endblock %}
 <script>
     $(document).ready(function(){
+        $('#form_save').attr('disabled','disabled').addClass('disabled').addClass('btn');
+
         $('a.accordion').click(function(){
             console.log($('#hints').attr('aria-expanded'))
             if($('#hints').attr('aria-expanded') == 'undefined' ) {
@@ -96,6 +98,7 @@
             });
             var val=$(this).data('value');
             $(this).addClass('redborder');
+            $('#form_save').removeAttr('disabled').removeClass('disabled');
             $('#form_suspectId_'+val).prop('checked',true);
         })
 
