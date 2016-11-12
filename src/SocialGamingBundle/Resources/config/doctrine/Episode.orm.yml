@@ -24,8 +24,6 @@ SocialGamingBundle\Entity\Episode:
         startdate:
             type: datetime
             nullable: false
-            options:
-                default: CURRENT_TIMESTAMP
             column: startDate
         enddate:
             type: datetime
@@ -36,7 +34,7 @@ SocialGamingBundle\Entity\Episode:
         summary:
             type: string
             nullable: true
-            length: 45
+            length: 245
             options:
                 fixed: false
     manyToOne:
