@@ -1,0 +1,11 @@
+.overlay_image img {
+    display: block;
+}
+.overlay_image span {
+    background-color: #000000;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 2em;
+    text-align: center;
+}

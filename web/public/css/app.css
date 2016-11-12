@@ -35,7 +35,9 @@ body {
 .overlay_image {
     background-color: hsla(0, 0%, 0%, 0.66);
 }
-
+overlay_text {
+    background-color:#ffffff;
+}
 .overlay_popup{
     hsla(0, 0%, 16%, 0.63);
 }

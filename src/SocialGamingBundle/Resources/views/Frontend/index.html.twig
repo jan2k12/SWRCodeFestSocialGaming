@@ -42,16 +42,28 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            {% include 'SocialGamingBundle:Frontend:menu.html.twig' %}
+            {% include 'SocialGamingBundle:Frontend:menu.html.twig  ' %}
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="panel-default">
-                <div class="panel-body" id="content">CONTENT</div>
+                {% block content %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-sm-8 overlay_image"><img class="center-block image_responsive" src="{{ asset('public/img/tatort1.jpg') }}" width="75%" height="40%" />
+                            <span> <h3 >Jetzt Live</h3> </span>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div></div>
+                    </div>
+                  </div>
+               {% endblock %}
             </div>
         </div>
     </div>
+        </div>
     <div class="row">
         <div class="col-md-12">
             <div id="header">FOOTER</div>
@@ -66,23 +78,6 @@
         </p>
     {% endfor %}
 {% endif %}
-{% block content %}
 
-
-    {% for show in shows %}
-        <div class="row">
-            <div class="col-md-12">
-                <h2>{{ show.name }} </h2>
-
-            </div>
-        </div>
-    {% endfor %}
-
-    <div class="row">
-
-        <div class="col-md-12">
-            <img src="{asset('public/img/tatortImage.png')}" class="img-responsive"/>
-        </div>
-    </div>
-{% endblock %}
 </html>
+
