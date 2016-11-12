@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.webkit.WebView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.pullTimer.cancel();
             }
         }, 60000);
-
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
     }
 
     @Override
