@@ -21,7 +21,7 @@ social_gaming_backend_create_suspect:
 #FRONTEND
 
 social_gaming_frontend:
-        path: /frontend/index
+        path: /
         defaults: { _controller: SocialGamingBundle:Frontend:index }
 
 social_gaming_frontend_startFront:
