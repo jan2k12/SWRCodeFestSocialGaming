@@ -50,7 +50,9 @@
             <div class="panel-default">
                 {% block content %}
                 <div id="content">
-
+                    {% for show in shows %}
+                        {{  show.name }}<br/>
+                    {% endfor %}
                 </div>
                {% endblock %}
             </div>

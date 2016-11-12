@@ -23,9 +23,8 @@ class FrontendController extends Controller
 {
     public function indexAction(){
 
-        $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow');
-        $user=$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find(9);
-        return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows,'user'=>$user));
+        $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
+        return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows));
     }
 
 

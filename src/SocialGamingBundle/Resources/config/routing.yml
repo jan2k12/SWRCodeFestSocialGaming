@@ -23,18 +23,15 @@ social_gaming_backend_create_suspect:
 social_gaming_frontend:
         path: /
         defaults: { _controller: SocialGamingBundle:Frontend:index }
-
 social_gaming_frontend_startFront:
         path: /frontend/startFront
         defaults: { _controller: SocialGamingBundle:Frontend:startFront }
 social_gaming_frontend_result:
         path: /frontend/result
         defaults: { _controller: SocialGamingBundle:Frontend:result }
-
 social_gaming_frontend_suspect:
         path: /frontend/suspect
         defaults: { _controller: SocialGamingBundle:Frontend:suspect }
-
 social_gaming_frontend_impressum:
         path: /frontend/impressum
         defaults: { _controller: SocialGamingBundle:Frontend:impressum }

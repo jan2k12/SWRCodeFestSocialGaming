@@ -108,55 +108,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `socialgaming`.`user_has_suspect`
+-- Table `socialgaming`.`userTipp`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `socialgaming`.`user_has_suspect` ;
+DROP TABLE IF EXISTS `socialgaming`.`userTipp` ;
 
-CREATE TABLE IF NOT EXISTS `socialgaming`.`user_has_suspect` (
-  `user_id` INT NOT NULL,
-  `suspect_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `suspect_id`),
-  INDEX `fk_user_has_suspect_suspect1_idx` (`suspect_id` ASC),
-  INDEX `fk_user_has_suspect_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_user_has_suspect_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `socialgaming`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_suspect_suspect1`
-    FOREIGN KEY (`suspect_id`)
-    REFERENCES `socialgaming`.`suspect` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `socialgaming`.`user_note`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `socialgaming`.`user_note` ;
-
-CREATE TABLE IF NOT EXISTS `socialgaming`.`user_note` (
-  `user_id` INT NOT NULL,
-  `episode_id` INT NOT NULL,
-  `text` TEXT NULL,
-  `score` INT NULL,
-  PRIMARY KEY (`user_id`, `episode_id`),
-  INDEX `fk_user_has_episode_episode1_idx` (`episode_id` ASC),
-  INDEX `fk_user_has_episode_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_user_has_episode_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `socialgaming`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_episode_episode1`
-    FOREIGN KEY (`episode_id`)
-    REFERENCES `socialgaming`.`episode` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS `socialgaming`.`userTipp` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `userId` VARCHAR(45) NOT NULL,
+  `suspectId` VARCHAR(45) NOT NULL,
+  `date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
