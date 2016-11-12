@@ -3,9 +3,9 @@
 namespace SocialGamingBundle\Entity;
 
 /**
- * Usertipp
+ * UserScore
  */
-class Usertipp
+class UserScore
 {
     /**
      * @var integer
@@ -18,14 +18,9 @@ class Usertipp
     private $userid;
 
     /**
-     * @var string
+     * @var integer
      */
-    private $suspectid;
-
-    /**
-     * @var \DateTime
-     */
-    private $date;
+    private $score;
 
 
     /**
@@ -43,7 +38,7 @@ class Usertipp
      *
      * @param string $userid
      *
-     * @return Usertipp
+     * @return UserScore
      */
     public function setUserid($userid)
     {
@@ -63,50 +58,55 @@ class Usertipp
     }
 
     /**
-     * Set suspectid
+     * Set score
      *
-     * @param string $suspectid
+     * @param integer $score
      *
-     * @return Usertipp
+     * @return UserScore
      */
-    public function setSuspectid($suspectid)
+    public function setScore($score)
     {
-        $this->suspectid = $suspectid;
+        $this->score = $score;
 
         return $this;
     }
 
     /**
-     * Get suspectid
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+    /**
+     * @var string
+     */
+    private $episodeid;
+
+
+    /**
+     * Set episodeid
+     *
+     * @param string $episodeid
+     *
+     * @return UserScore
+     */
+    public function setEpisodeid($episodeid)
+    {
+        $this->episodeid = $episodeid;
+
+        return $this;
+    }
+
+    /**
+     * Get episodeid
      *
      * @return string
      */
-    public function getSuspectid()
+    public function getEpisodeid()
     {
-        return $this->suspectid;
-    }
-
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Usertipp
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
+        return $this->episodeid;
     }
 }

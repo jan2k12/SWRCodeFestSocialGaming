@@ -19,6 +19,7 @@ use SocialGamingBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -157,10 +158,15 @@ class AdminController extends Controller
     public function createSuspectAction(Request $request){
         $suspect=new Suspect();
         $suspectForm=$this->createFormBuilder($suspect)
-            ->add('name',TextType::class  ,array('attr'=> array('class'=>'form-control' )))
-            ->add('guilty',CheckboxType::class  ,array('attr'=> array('class'=>'form-control')))
-            ->add('imagepath',TextType::class  ,array('attr'=> array('class'=>'form-control' )))
-            ->add('save',SubmitType::class  ,array('attr'=> array('class'=>'form-control' )))
+            ->add('name',TextType::class)
+            ->add('guilty',ChoiceType::class, array('choices'=>array('yes'=>'1','no'=>'0')))
+            ->add('imagepath',TextType::class)
+            ->add('episode', EntityType::class,array(
+                'class'=>'SocialGamingBundle:Episode',
+                'query_builder'=>function(EntityRepository $er){
+                    return null;
+                }))
+            ->add('save',SubmitType::class)
             ->getForm();
 
 

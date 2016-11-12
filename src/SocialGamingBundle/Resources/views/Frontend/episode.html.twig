@@ -1,7 +1,70 @@
 {% block content %}
-    {{ form_start(suspectForm) }}
-    <div class="col-md-4"  >
-        {{ form_widget(suspectForm) }}
+    <div class="row headline-episode">
+        <div class="col-md-2 col-xs-2">
+            <img style="max-width:50px;" src="{{ asset('public/img/fingerabdruck.png') }}" class="img-responsive thumb" alt="hier ist der Daumen">
+        </div>
+        <div class="col-md-10 col-xs-10">
+            {{ show.name }} - {{ episode.name }}
+        </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="#hints" class="accordion" data-toggle="collapse">
+                <span class="hint-text-head">Alle Hinweise <span class="glyphicon glyphicon-chevron-down"></span> </span>
+            </a>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+        <div id="hints" class="hints collapse">
+        {%  for hint in hints %}
+            <div class="row">
+                <div class="col-md-12">
+                    {{ hint.text }}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        </div>
+    </div>
+    <br/>
+    {{ form_start(suspectForm, {'attr': {'id': 'form_user_tip'}}) }}
+    {{ form_widget(suspectForm) }}
     {{ form_end(suspectForm) }}
 {% endblock %}
+<script>
+    $(document).ready(function(){
+        $('a.accordion').click(function(){
+            console.log($('#hints').attr('aria-expanded'))
+            if($('#hints').attr('aria-expanded') == 'undefined' ) {
+                $('.glyphicon').removeClass('glyphicon-chevron-up');
+                $('.glyphicon').addClass('glyphicon-chevron-down');
+            }
+            else if( $('#hints').attr('aria-expanded')==='true' ){
+                $('.glyphicon').removeClass('glyphicon-chevron-up');
+                $('.glyphicon').addClass('glyphicon-chevron-down');
+            }else{
+                $('.glyphicon').removeClass('glyphicon-chevron-down');
+                $('.glyphicon').addClass('glyphicon-chevron-up');
+            }
+        })
+
+
+        $('#form_user_tip').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                url: '/episode/view/'+{{ episode.id}},
+                type:'POST',
+                data: $(this).serialize()
+            }).done(function(data){
+
+            })
+
+        })
+
+        $('#form_suspectId > label').after('<br/>')
+    })
+
+
+</script>

@@ -39,9 +39,11 @@ class FrontendController extends Controller
     }
 
     public function episodeViewAction($episodeId,Request $request){
+        $episode=$this->getDoctrine()->getRepository('SocialGamingBundle:Episode')->find($episodeId);
+        $show=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->find($episode->getShow()->getId());
         $hints=$this->getDoctrine()->getEntityManager()->createQuery('SELECT h from SocialGamingBundle:Hint as h where h.episode=:episode')->setParameter('episode',$episodeId)->getResult();
         $suspects=$this->getDoctrine()->getEntityManager()->createQuery('SELECT s from SocialGamingBundle:Suspect as s where s.episode=:episode')->setParameter('episode',$episodeId)->getResult();
-        $user=$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find(9);
+        $user=$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find(1);
         $userTipp=new Usertipp();
         $userTipp->setUserid($user->getId());
         $userTipp->setDate(new \DateTime());
@@ -72,7 +74,7 @@ class FrontendController extends Controller
 
             return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig',array('user'=>$user,'errors'=>$errors));
         }
-         return $this->render('SocialGamingBundle:Frontend:episode.html.twig',array('suspectForm'=>$suspectForm->createView(),'hints'=>$hints));
+         return $this->render('SocialGamingBundle:Frontend:episode.html.twig',array('suspectForm'=>$suspectForm->createView(),'hints'=>$hints,'show'=>$show,'episode'=>$episode));
     }
 
     public function suspectFrontAction(Request $request){
@@ -129,5 +131,11 @@ class FrontendController extends Controller
         return $this->render('SocialGamingBundle:Frontend:impressum.html.twig',array());
 
 
+    }
+
+    public function highscoreAction($userId=null){
+        if(!is_null($userId)){
+            $user=$
+        }
     }
 }

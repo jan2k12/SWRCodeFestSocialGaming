@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`episode` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `startDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `endDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `endDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `summary` VARCHAR(45) NULL,
   `show_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `socialgaming`.`hint` ;
 CREATE TABLE IF NOT EXISTS `socialgaming`.`hint` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `text` TEXT NOT NULL,
-  `date` TIMESTAMP NOT NULL,
+  `date` DATETIME NOT NULL,
   `episode_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_hint_episode1_idx` (`episode_id` ASC),
@@ -117,6 +117,20 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`userTipp` (
   `userId` VARCHAR(45) NOT NULL,
   `suspectId` VARCHAR(45) NOT NULL,
   `date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `socialgaming`.`user_score`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `socialgaming`.`user_score` ;
+
+CREATE TABLE IF NOT EXISTS `socialgaming`.`user_score` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `userId` VARCHAR(45) NOT NULL,
+  `score` INT NOT NULL,
+  `episodeId` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

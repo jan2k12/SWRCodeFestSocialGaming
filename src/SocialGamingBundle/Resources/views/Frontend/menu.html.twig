@@ -1,6 +1,43 @@
+<div class="row app-titlebar">
+    <div class="col-md-12">
+        <img id="app-menu-icon" onclick="app.toggleMenu()" src="{{ asset('public/gfx/hamburger_menu.png') }}" /><span class="app-title">Mordsgaudi</span>
+    </div>
+</div>
+<div id="app-menu">
+    <div class="app-menu-guest">
+        <div class="app-menu-title-bar">GAST</div>
+        <ul>
+            <li>
+                <img src="{{ asset('public/gfx/fingerabdruck.png') }}" class="menu-item-icon">
+                <a href="#/frontend/startFront">Home</a>
+            </li>
+            <li>
+                <img src="{{ asset('public/gfx/pokal.png') }}" class="menu-item-icon">
+                <a href="#/frontend/highscore">Highscore</a>
+            </li>
+            <li>
+                <img src="{{ asset('public/gfx/profile.png') }}" class="menu-item-icon">
+                <a href="#/frontend/highscore">Profil</a>
+            </li>
+            <li>
+                <img src="{{ asset('public/gfx/group.png') }}" class="menu-item-icon">
+                <a href="#/frontend/groups">Gruppen</a>
+            </li>
+            <li class="app-menu-divider"></li>
+            <li>
+                <a href="#/frontend/impressum">Impressum</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<div id="app-menu-cover-area" onclick="app.toggleMenu(false)">
+
+</div>
+
+<!--
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -15,20 +52,22 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="app.navigateTo('/admin')">Admin</a></li>
+                        <li><a href="#/admin/user/create">CREATE USER</a></li>
                         <li role="separator" class="divider"></li>
+
                         <li><a href="#" onclick="app.navigateTo('/admin/user/create')">CREATE USER</a></li>
 
-                        <li><a href="#" onclick="app.navigateTo('/frontend/startFront')">startseite</a></li>
-                        <li><a href="#" onclick="app.navigateTo('/admin/show/create')">CREATE SHOW</a></li>
-                        <li><a href="#" onclick="app.navigateTo('/frontend/impressum')">Impressum</a></li>
-                        <li><a href="#" onclick="app.navigateTo('/frontend/highscore')">Highscore</a></li>
-                        <li><a href="#" onclick="app.navigateTo('/frontend/info')">info</a></li>
+                        <li><a href="#/frontend/info">info</a></li>
+                        <li><a href="#/admin/show/create">CREATE SHOW</a></li>
+                        <li><a href="#/frontend/impressum">Impressum</a></li>
+                        <li><a href="#/frontend/highscore">Highscore</a></li>
+
 
                     </ul>
                 </li>
             </ul>
             <span></span>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
+-->
