@@ -2,11 +2,11 @@ social_gaming_homepage:
     path:     /
     defaults: { _controller: SocialGamingBundle:Default:index }
 social_gaming_backend:
-    path: /admin
-    defaults: { _controller: SocialGamingBundle:Admin:index }
-social_gaming_backend:
-    path: /admin/episode/create
-    defaults: { _controller: SocialGamingBundle:Admin:createEpisode }
-social_gaming_user:
-  path: /user/view/{id}
-  defaults: { _controller: SocialGamingBundle:User:view }
+        path: /admin
+        defaults: { _controller: SocialGamingBundle:Admin:index }
+social_gaming_backend_create_user:
+    path: /admin/user/create
+    defaults: { _controller: SocialGamingBundle:Admin:createUser }
+social_gaming_backend_create_show:
+    path: /admin/show/create
+    defaults: { _controller: SocialGamingBundle:Admin:createShow }

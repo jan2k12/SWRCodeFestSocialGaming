@@ -2,7 +2,7 @@
 <head>Social Gaming Admin</head>
 <body>
 
-{% if errors %}
+{% if errors is defined%}
     <p>{{ errors }}</p>
 {% endif  %}
 {% block content %}

@@ -19,7 +19,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
 {
-    public function indexAction(Request $request){
+    public function indexAction(){
+        return $this->render('SocialGamingBundle:Admin:index.html.twig');
+    }
+
+    public function createUserAction(Request $request){
 
         $user=new User();
         $userForm=$this->createFormBuilder($user)
@@ -46,10 +50,11 @@ class AdminController extends Controller
 
     }
 
-    public function createShow(Request $request){
+    public function createShowAction(Request $request){
         $show=new Show();
         $showForm=$this->createFormBuilder($show)
             ->add('name',TextType::class)
+            ->add('save',SubmitType::class)
             ->getForm();
 
 
