@@ -28,6 +28,7 @@ class FrontendController extends Controller
         return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows,'user'=>$user));
     }
 
+
     public function episodesViewAction($showId){
         $episodes=$this->getDoctrine()->getEntityManager()->createQuery('SELECT e from SocialGamingBundle:Episode as e where e.show=:showid')->setParameter('showid',$showId)->getResult();
         return $this->render('SocialGamingBundle:Frontend:episodes.html.twig',array('episodes'=>$episodes));
@@ -67,8 +68,7 @@ class FrontendController extends Controller
 
             return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig',array('user'=>$user,'errors'=>$errors));
         }
-
-        return $this->render('SocialGamingBundle:Frontend:episode.html.twig',array('suspectForm'=>$suspectForm->createView(),'hints'=>$hints));
+         return $this->render('SocialGamingBundle:Frontend:episode.html.twig',array('suspectForm'=>$suspectForm->createView(),'hints'=>$hints));
     }
 
     public function suspectFrontAction(Request $request){
@@ -87,9 +87,9 @@ class FrontendController extends Controller
             $em->persist($episode);
             $em->flush();
 
-            return $this->render('SocialGamingBundle:Default:suspectFront.html.twig',array('suspectForm'=>$suspectFrontForm->createView(),'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig',array('suspectForm'=>$suspectFrontForm->createView(),'errors'=>$errors));
         }
-        return $this->render('SocialGamingBundle:Default:suspectFront.html.twig',array('suspectFrontForm'=>$suspectFrontForm->createView()));
+        return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig',array('suspectFrontForm'=>$suspectFrontForm->createView()));
 
 
     }
@@ -112,9 +112,9 @@ class FrontendController extends Controller
             $em->persist($result);
             $em->flush();
 
-            return $this->render('SocialGamingBundle:Default:result.html.twig',array('resultForm'=>$resultForm->createView(),'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Frontend:result.html.twig',array('resultForm'=>$resultForm->createView(),'errors'=>$errors));
         }
-        return $this->render('SocialGamingBundle:Default:result.html.twig',array('resultFrontForm'=>$resultForm->createView()));
+        return $this->render('SocialGamingBundle:Frontend:result.html.twig',array('resultForm'=>$resultForm->createView()));
 
     }
 
