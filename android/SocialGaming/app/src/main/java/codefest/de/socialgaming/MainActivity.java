@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
+import android.view.ViewTreeObserver;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Timer pullTimer;
     private Vector<Integer> receivedNotifications = new Vector<>();
+    private ViewTreeObserver.OnScrollChangedListener scrollListener;
+    private SwipeRefreshLayout layout = null;
+    private WebView webView = null;
 
     private void sendNotification(int id, String title, String text) {
         Intent notificationIntent = new Intent(this, MainActivity.class);
@@ -51,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-        final WebView webView = (WebView) findViewById(R.id.webview);
-        final SwipeRefreshLayout layout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        webView = (WebView) findViewById(R.id.webview);
+        layout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         webView.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
                 layout.setRefreshing(false);
@@ -113,5 +117,22 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancelAll();
+        layout.getViewTreeObserver().addOnScrollChangedListener(scrollListener =
+                new ViewTreeObserver.OnScrollChangedListener() {
+                    @Override
+                    public void onScrollChanged() {
+                        if (webView.getScrollY() == 0)
+                            layout.setEnabled(true);
+                        else
+                            layout.setEnabled(false);
+
+                    }
+                });
+    }
+
+    @Override
+    public void onStop() {
+        layout.getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
+        super.onStop();
     }
 }
