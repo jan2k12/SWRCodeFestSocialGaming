@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`user` (
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `isActive` TINYINT(4) NULL,
-  `user_suspect_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
@@ -30,9 +29,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `socialgaming`.`show`
+-- Table `socialgaming`.`tvshow`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socialgaming`.`show` (
+CREATE TABLE IF NOT EXISTS `socialgaming`.`tvshow` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -46,7 +45,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `socialgaming`.`episode` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `startDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `startDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `endDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `summary` VARCHAR(45) NULL,
   `show_id` INT NOT NULL,
@@ -54,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`episode` (
   INDEX `fk_episode_show_idx` (`show_id` ASC),
   CONSTRAINT `fk_episode_show`
     FOREIGN KEY (`show_id`)
-    REFERENCES `socialgaming`.`show` (`id`)
+    REFERENCES `socialgaming`.`tvshow` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
