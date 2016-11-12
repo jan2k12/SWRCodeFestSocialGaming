@@ -77,7 +77,7 @@ class FrontendController extends Controller
     {
         $impressumForm=$this->createFormBuilder();
 
-        return $this->render('SocialGamingBundle:Default:impressum.html.twig',array('impressumForm'=>$impressumForm->createView()));
+        return $this->render('SocialGamingBundle:Frontend:impressum.html.twig',array());
 
 
     }
