@@ -28,7 +28,7 @@ import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String server = "192.168.206.8";
+    private final String server = "10.0.2.2";//"192.168.206.8";
     private Timer pullTimer;
     private Vector<Integer> receivedNotifications = new Vector<>();
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
