@@ -5,9 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.KeyEventCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
+import android.view.KeyEvent;
 import android.view.ViewTreeObserver;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,6 +28,7 @@ import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String server = "192.168.206.8";
     private Timer pullTimer;
     private Vector<Integer> receivedNotifications = new Vector<>();
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("http://192.168.206.8");
+        webView.loadUrl("http://" + server);
 
         layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         pullTimer.schedule(new TimerTask() {
             private void checkNotifications() {
                 try {
-                    InputStream inputStream = (new URL("http://192.168.206.8/test.json")).openStream();
+                    InputStream inputStream = (new URL("http://" + server + "/android/getHints/json")).openStream();
                     Scanner s = new Scanner(inputStream).useDelimiter("\\A");
                     String string = s.hasNext() ? s.next() : "";
                     JSONObject json = new JSONObject(string);
@@ -134,5 +137,22 @@ public class MainActivity extends AppCompatActivity {
     public void onStop() {
         layout.getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
         super.onStop();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+                    if (webView.canGoBack()) {
+                        webView.goBack();
+                    } else {
+                        finish();
+                    }
+                    return true;
+            }
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

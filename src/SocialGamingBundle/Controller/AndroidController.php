@@ -1,11 +1,6 @@
 <?php
 /**
  * Created by PhpStorm.
-<<<<<<< HEAD
- * User: frithjof
-=======
- * User: snickas2
->>>>>>> master
  * Date: 12.11.2016
  * Time: 08:46
  */
