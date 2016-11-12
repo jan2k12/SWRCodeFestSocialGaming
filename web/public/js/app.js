@@ -24,12 +24,12 @@ var app = {
         },
 
         onWindowResized: function() {
-            const appTitleBarBottom = $(".app-titlebar").outerHeight();
+            const appTitleBarBottom = 87;
             $("#app-menu").css({"top": appTitleBarBottom });
 
 
             const docSize = {width: $(document).width() -15, height: $(document).height()- appTitleBarBottom};
-            $("#app-menu-cover-area").css({"width": docSize.width, "height": docSize.height, "top": appTitleBarBottom});
+            $("#app-menu-cover-area").css({"width": docSize.width, "height": docSize.height,"top": appTitleBarBottom });
         },
 
         navigateTo: function (relativePath) {
@@ -53,10 +53,14 @@ var app = {
 
                 app.isMenuVisible = !app.isMenuVisible;
             }
-            $("#app-menu-icon").removeClass("app-menu-icon");
-            $("#app-menu-icon").removeClass("app-menu-icon-opened");
+            if(app.isMenuVisible){
+                $("#app-menu-icon-closed").hide();
+                $("#app-menu-icon-opened").show();
+            }else {
+                $("#app-menu-icon-opened").hide();
+                $("#app-menu-icon-closed").show();
+            }
 
-            $("#app-menu-icon").addClass(app.isMenuVisible ? "app-menu-icon-opened" : "app-menu-icon");
 
         },
         showMenuFor: function(username){

@@ -1,8 +1,6 @@
 <div class="app-titlebar">
-    <div class="col-md-12">
-        <img id="app-menu-icon" onclick="app.toggleMenu()" src="{{ asset('public/gfx/mordsgaudi_menu_offen.png') }}"/>
-        <img style="display:none" id="app-menu-icon" onclick="app.toggleMenu()" src="{{ asset('public/gfx/mordsgaudi_menu_zu.png') }}"/>
-    </div>
+        <img id="app-menu-icon-closed" onclick="app.toggleMenu()" src="{{ asset('public/gfx/mordsgaudi_menu_zu.png') }}"/>
+        <img style="display:none" id="app-menu-icon-opened" onclick="app.toggleMenu()" src="{{ asset('public/gfx/mordsgaudi_menu_offen.png') }}"/>
 </div>
 <div id="app-menu">
     <div class="app-menu-guest">
@@ -13,7 +11,7 @@
                                                      class="menu-item-icon">Home</a>
             </li>
             <li onclick="$('.embedded-login-form').toggle('blind');$('#logon_username').focus()">
-                <a href="#/frontend/highscore"><img src="{{ asset('public/gfx/einlogge.png') }}" class="menu-item-icon">Einloggen</a>
+                <a><img src="{{ asset('public/gfx/einlogge.png') }}" class="menu-item-icon">Einloggen</a>
             </li>
             <li>
                 <div class="embedded-login-form">
