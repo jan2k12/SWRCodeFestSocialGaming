@@ -51,20 +51,19 @@
                 {% block content %}
                 <div class="container">
                     <div class="row">
-
                         <div class="col-md-2"></div>
-                        <div class="col-sm-4 overlay_image"><img class="center-block " src="{{ asset('dump') }}"width="60%" height="33%" />
-                            <span> Jetzt Live </span>
+                        <div class="col-sm-8 overlay_image"><img class="center-block image_responsive" src="{{ asset('public/img/tatort1.jpg') }}" width="75%" height="40%" />
+                            <span> <h3 >Jetzt Live</h3> </span>
                         </div>
                         <div class="col-md-2"></div>
+                        <div></div>
                     </div>
-
-
-
-                    {% endblock %}
+                  </div>
+               {% endblock %}
             </div>
         </div>
     </div>
+        </div>
     <div class="row">
         <div class="col-md-12">
             <div id="header">FOOTER</div>
@@ -82,14 +81,3 @@
 
 </html>
 
-.overlay_image img {
-display: block;
-}
-.overlay_image span {
-background-color: #000000;
-position: absolute;
-bottom: 0;
-width: 100%;
-line-height: 2em;
-text-align: center;
-}
