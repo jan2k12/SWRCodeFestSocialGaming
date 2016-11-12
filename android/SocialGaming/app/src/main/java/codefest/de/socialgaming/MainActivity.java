@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent intent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
         Notification notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.drawable.appicon)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setVibrate(new long[]{200})
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         stopTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                MainActivity.this.sendNotification(0, "Stopped", "");
+                //MainActivity.this.sendNotification(0, "Stopped", "");
                 MainActivity.this.pullTimer.cancel();
             }
         }, 3600000);
