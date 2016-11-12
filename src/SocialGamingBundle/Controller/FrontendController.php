@@ -11,6 +11,7 @@ namespace SocialGamingBundle\Controller;
 use SocialGamingBundle\Entity\Suspect;
 use SocialGamingBundle\Entity\User;
 use SocialGamingBundle\Entity\Usertipp;
+use SocialGamingBundle\Entity\UserScore;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -62,15 +63,26 @@ class FrontendController extends Controller
             $errors=array();
             $userTipp = $form->getData();
 
-            $userScore = new UserScore;
+            $userScore = new UserScore();
             $userScore->setUserid($userTipp->getUserid());
             $userScore->setEpisodeid($episode->getId());
+            $numHits = 0;
+            foreach ($hints as $hint) {
+                if ($hint->getDate() < new DateTime()) {
+                    $numHits ++;
+                }
+            }
             if ($userTipp->getSuspectid()->getGuilty()) {
-                $duration = strtotime($episode->getEnddate())
-                    - strtotime($episode->getStartdate());
-                $guesstime = strtotime($userTipp->getDate())
-                    - strtotime($episode->getStartdate());
+                $duration = $episode->getEnddate()->getTimestamp()
+                    - $episode->getStartdate()->getTimestamp();
+                $guesstime = $userTipp->getDate()->getTimestamp()
+                    - $episode->getStartdate()->getTimestamp();
                 $timeratio = $guesstime / $duration;
+                if ($timeratio < 0) {
+                    throw new \Exception('Event not started');
+                } else {
+                    $userScore->setScore(100*(10-$numHits-5*$timeratio));
+                }
             } else {
                 $userScore->setScore(0);
             }
@@ -79,9 +91,10 @@ class FrontendController extends Controller
             try{
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($userTipp);
+                $em->persist($userScore);
                 $em->flush();
-            }catch(\Exception $ex){
-                $errors[] =$ex->getMessage();
+            } catch(\Exception $ex) {
+                $errors[] = $ex->getMessage();
             }
 
             return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig',array('user'=>$user,'errors'=>$errors));
