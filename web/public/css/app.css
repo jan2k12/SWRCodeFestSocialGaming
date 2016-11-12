@@ -335,3 +335,40 @@ input{
 .headline-episode{
     font-size:2.5em;
 }
+
+.votebtn{
+    width:100%;
+    background-color:#292929;
+    color:#fff;
+    line-height: 1.8em;
+    font-size:2em;
+    font-weight:bolder;
+    border-color:#000;
+}
+.suspect-img-cnt{
+    position:relative;
+    display: inline-block;
+}
+
+.suspect-overlay_text{
+    bottom: 0;
+    width: 100%;
+    line-height: 2em;
+    text-align: center;
+    opacity: 0.8;
+    background-color:#c3c3c3;
+    color:#000;
+}
+
+#form_suspectId{
+    visibility: hidden;
+}
+
+.clickable-suspect{
+    display: inline-block;
+    cursor: pointer;
+}
+
+.redborder{
+    border:4px solid #bb2626;
+}
