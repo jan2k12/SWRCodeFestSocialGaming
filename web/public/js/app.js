@@ -24,8 +24,8 @@ var app = {
         },
 
         onWindowResized: function() {
-            const appTitleBarBottom = 87;
-            $("#app-menu").css({"top": appTitleBarBottom });
+            const appTitleBarBottom = 0;
+            //$("#app-menu").css({"top": appTitleBarBottom });
 
 
             const docSize = {width: $(document).width() -15, height: $(document).height()- appTitleBarBottom};

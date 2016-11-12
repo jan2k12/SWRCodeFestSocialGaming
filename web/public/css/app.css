@@ -1,5 +1,5 @@
 .app-titlebar{
-    position:absolute;
+    position:relative;
     z-index:1000;
     left:0;
     top:0;
@@ -16,6 +16,7 @@
 
 #app-menu{
     position:absolute;
+    top:63px;
     left:0;
     display:none;
     z-index:1000;
@@ -46,16 +47,16 @@
 
 }
 
-#app-menu a:link,
-#app-menu a:visited,
-#app-menu a:hover,
-#app-menu a:focus{
+a:link,
+a:visited,
+a:hover,
+a:focus{
     color: #ffffff;
     text-decoration: none;
 }
 
 
-#app-menu a:hover {
+a:hover {
     color: #991420;
 }
 
@@ -131,13 +132,6 @@ h2, h3 {
 .note_textarea {
     background-color: #b6b6b6;
     color:#292929;
-}
-#app-menu{
-    position:absolute;
-    left:0;
-    display:none;
-    z-index:1000;
-    font-size: 1.8em;
 }
 
 #app-menu-cover-area{
