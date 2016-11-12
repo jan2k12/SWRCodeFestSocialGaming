@@ -8,10 +8,13 @@
 
 namespace SocialGamingBundle\Controller;
 
+
+use SocialGamingBundle\Entity\Episode;
 use SocialGamingBundle\Entity\Show;
 use SocialGamingBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -72,6 +75,33 @@ class AdminController extends Controller
         }
 
         return $this->render('SocialGamingBundle:Admin:show.html.twig',array('showForm'=>$showForm->createView()));
+    }
+
+    public function createEpisodeAction(Request $request){
+        $episode=new Episode();
+        $episodeForm=$this->createFormBuilder($episode)
+            ->add('name',TextType::class)
+            ->add('startdate',DateTimeType::class)
+            ->add('enddate',DateTimeType::class)
+            ->add('summery',TextType::class)
+
+            ->getForm();
+
+
+        $form=$episodeForm->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $errors=array();
+            $episode = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($episode);
+            $em->flush();
+
+            return $this->render('SocialGamingBundle:Admin:episode.html.twig',array('episodeForm'=>$episodeForm->createView(),'errors'=>$errors));
+        }
+
+        return $this->render('SocialGamingBundle:Admin:episode.html.twig',array('episodeForm'=>$episodeForm->createView()));
     }
 
 }
