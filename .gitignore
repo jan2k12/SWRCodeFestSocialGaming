@@ -1,4 +1,5 @@
 app/config/parameters.yml
+web/public/img/
 /bin/
 /build/
 !/composer.phar
@@ -11,3 +12,5 @@ var/sessions/.gitkeep
 /phpunit.xml
 .idea
 .idea/*
+web/public/img
+web/public/img/*

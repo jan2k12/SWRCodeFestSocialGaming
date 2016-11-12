@@ -1,0 +1,6 @@
+{% block content %}
+    {{ dump(episodes) }}
+{% for episode in episodes %}
+    {{ episode.name }}
+{% endfor %}
+{% endblock %}

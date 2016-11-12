@@ -50,13 +50,4 @@ SocialGamingBundle\Entity\Episode:
                 show_id:
                     referencedColumnName: id
             orphanRemoval: false
-    manyToMany:
-        user:
-            targetEntity: User
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: episode
-            inversedBy: null
-            joinTable: null
-            orderBy: null
     lifecycleCallbacks: {  }
