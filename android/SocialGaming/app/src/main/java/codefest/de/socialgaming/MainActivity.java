@@ -5,9 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -49,8 +51,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-        WebView webView = (WebView) findViewById(R.id.webview);
-        webView.loadUrl("http://192.168.206.8/");
+        final WebView webView = (WebView) findViewById(R.id.webview);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("http://192.168.206.8");
+
+        final SwipeRefreshLayout layout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                webView.loadUrl(webView.getUrl());
+                layout.setRefreshing(false);
+            }
+        });
 
         pullTimer = new Timer();
         pullTimer.schedule(new TimerTask() {
