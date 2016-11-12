@@ -3,20 +3,32 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="row">
-                    <div>
-                        <img class="center-block img-responsive" src="{{ asset('public/img/daserste_logo.png') }}" />
-                    </div>
-                    <br/>
-                     <div  class="overlay_text col-md-12"><span class="glyphicon glyphicon glyphicon-play-circle" style="color:red" aria-hidden="true"></span><strong> Jetzt Live</strong> </div>
-                    <img class="center-block img-responsive overlay_img" style="width:100%" src="{{ asset('public/img/tatort1.jpg') }}"  />
-                     <div  class="overlay_text col-md-12"><span class="glyphicon glyphicon glyphicon-play-circle" style="color:red" aria-hidden="true"></span><strong> Jetzt Live</strong>   </div>
-                    <a onclick="app.navigateTo('/episode/view/1')" href="#"><img class="center-block img-responsive overlay_img" style="width:100%" src="{{ asset('public/img/tatort1.jpg') }}"  /></a>
+                   <br/>
+                   <div  class="overlay_text col-md-12"><span class="glyphicon glyphicon glyphicon-play-circle" style="color:red" aria-hidden="true"></span><strong> Jetzt Live</strong>   </div>
+                    <a onclick="app.navigateTo('/episode/view/1')" href="#"><img class="center-block img-responsive" style="width:100%" src="{{ asset('public/img/tatort1.jpg') }}"  /></a>
                 </div>
             </div>
             <div class="col-md-2"></div>
          </div>
         <div class="row">
+            <div class="col-xs-6"><img class="center-block img-responsive" style="max-height: 30px;" src="{{ asset('public/img/daserste_logo.png') }}" /></div>
+            <div class="col-xs-6" ></div>
+        </div>
+        <div class="row" style="background-color: #555555">
+            <p>Ein Umweltaktivist wird erschossen und sein Freund Henrik Paulsen
+            verschwindet auf einem Windrad in der Nordsee. Die Bremer Kommissare
+            Inga Lürsen und Stedefreund ermitteln <b>[...]</b> </p>
+        </div>
+        <div class="row" style="text-align:center; "><strong> Weitere Sendungen </strong>  </div>
+        <br>
 
+        <div class="row">
+            <div class="col-xs-6 overlay_text" style="bottom:220px;"><img class="center-block img-responsive  " style="max-height: 30px; top:10px;" src="{{ asset('public/img/zdf.png') }}" /></div><div class="col-xs-6"> | Morgen 20:15 </div>
+            <a onclick="app.navigateTo('/info/view/1')" href="#"><img class="center-block img-responsive " style="width:100% ; max-height: 100px;" src="{{ asset('public/img/weitere_Sendungen2.jpg') }}"/></a>
+        </div>
+        <div class="row">
+            <div class="overlay_text col-xs-6" style="bottom:100px;"><img class="center-block img-responsive" style="max-height: 30px;" src="{{ asset('public/img/zdf.png') }}" /></div>  <div class="col-xs-6"><b > | 15.11. 20:15 </b></div>
+            <a onclick="app.navigateTo('/info/view/2')" href="#"><img class="center-block img-responsive " style="width:100% ; max-height: 100px;" src="{{ asset('public/img/weitere_Sendungen_1.jpg') }}"/></a>
         </div>
     </div>
 {% endblock %}

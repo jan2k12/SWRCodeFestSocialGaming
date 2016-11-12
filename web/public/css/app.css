@@ -237,10 +237,20 @@ body {
     line-height: 2em;
     text-align: center;
     opacity: 0.8;
-    background-color:#c3c3c3;
-    color:#000;
+    background-color:#000000;
+    color:#ffffff;
 }
-
+.overlay_text_oben{
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    line-height: 2em;
+    text-align: center;
+    opacity: 0.8;
+    background-color:#000000;
+    color:#ffffff;
+}
 .hint-text-head{
     font-weight:bold;
     color:#fff;
