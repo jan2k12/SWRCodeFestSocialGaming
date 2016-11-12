@@ -14,16 +14,16 @@ use Symfony\Component\HttpFoundation\Request;
 class AndroidController extends Controller
 {
     public function getHintsAction(){
+        $hints = $this->getDoctrine()->getRepository('SocialGamingBundle:Hint')->findAll();
 
-        $hint1 = new \stdClass();
-        $hint1->hint = "Test";
-        $hint1->show = "Tatort";
-        $hint1->id = 196;
-
-        $data = array(
-        );
-
-        $data[0] = $hint1;
+        $data = array();
+        foreach ($hints as $hint) {
+            $elem = new \stdClass();
+            $elem->hint = $hint->getText();
+            $elem->show = $hint->getEpisode()->getShow()->getName();
+            $elem->id = $hint->getId();
+            array_push($data, $elem);
+        }
 
         return new JsonResponse($data);
     }
