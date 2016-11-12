@@ -50,3 +50,17 @@ social_gaming_android_getHints:
         defaults: { _controller: SocialGamingBundle:Android:getHints }
 
 
+#USER
+
+social_gaming_user_login:
+        path: /user/login
+        defaults: { _controller: SocialGamingBundle:User:login }
+
+social_gaming_user_logout:
+        path: /user/logout
+        defaults: { _controller: SocialGamingBundle:User:logout }
+
+social_gaming_user_isLoggedIn:
+        path: /user/isLoggedIn
+        defaults: { _controller: SocialGamingBundle:User:isLoggedIn }
+

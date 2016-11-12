@@ -12,8 +12,15 @@
                 <a href="#/frontend/startFront"><img src="{{ asset('public/gfx/fingerabdruck.png') }}"
                                                      class="menu-item-icon">Home</a>
             </li>
-            <li onclick="app.toggleMenu(false)">
+            <li onclick="$('.embedded-login-form').toggle('blind');$('#logon_username').focus()">
                 <a href="#/frontend/highscore"><img src="{{ asset('public/gfx/einlogge.png') }}" class="menu-item-icon">Einloggen</a>
+            </li>
+            <li>
+                <div class="embedded-login-form">
+                    <input id="logon_username" type="text" placeholder="Username" class="textbox" onkeydown="if (event.which == 13 || event.keyCode == 13) {user.login()}"/><br/>
+                    <input id="logon_password" type="password" placeholder="Password" class="textbox" onkeydown="if (event.which == 13 || event.keyCode == 13) {user.login()}"/><br/>
+                    <button class="button" onclick="user.login()">Login</button>
+                </div>
             </li>
             <li onclick="app.toggleMenu(false)">
                 <a href="#/frontend/highscore">
@@ -32,7 +39,7 @@
     </div>
 
     <div class="app-menu-user">
-        <div class="app-menu-title-bar">BARONIN VON PORZ</div>
+        <div class="app-menu-title-bar"></div>
         <ul>
             <li onclick="app.toggleMenu(false)">
                 <a href="#/frontend/startFront"><img src="{{ asset('public/gfx/fingerabdruck.png') }}"
@@ -51,12 +58,12 @@
                     <img src="{{ asset('public/gfx/group.png') }}" class="menu-item-icon">Gruppen</a>
             </li>
             <li class="app-menu-divider"></li>
-            <li onclick="app.toggleMenu(false)">
+            <li onclick="user.logout();">
                 <a href="#/frontend/logout">
                     <img src="{{ asset('public/gfx/auslogge.png') }}" class="menu-item-icon">Ausloggen</a>
             </li>
             <li class="app-menu-divider"></li>
-            <li onclick="app.toggleMenu(false)">
+            <li class="no-icon" onclick="app.toggleMenu(false)">
                 <a href="#/frontend/impressum">Impressum</a>
             </li>
         </ul>
