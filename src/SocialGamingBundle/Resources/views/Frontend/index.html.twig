@@ -37,13 +37,26 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            {% include 'SocialGamingBundle:Frontend:menu.html.twig' %}
+            {% include 'SocialGamingBundle:Frontend:menu.html.twig  ' %}
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="panel-default">
-                <div class="panel-body" id="content">CONTENT</div>
+                {% block content %}
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-2"></div>
+                        <div class="col-sm-4 overlay_image"><img class="center-block " src="{{ asset('dump') }}"width="60%" height="33%" />
+                            <span> Jetzt Live </span>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+
+
+
+                    {% endblock %}
             </div>
         </div>
     </div>
@@ -61,23 +74,17 @@
         </p>
     {% endfor %}
 {% endif %}
-{% block content %}
 
-
-    {% for show in shows %}
-        <div class="row">
-            <div class="col-md-12">
-                <h2>{{ show.name }} </h2>
-
-            </div>
-        </div>
-    {% endfor %}
-
-    <div class="row">
-
-        <div class="col-md-12">
-            <img src="{asset('public/img/tatortImage.png')}" class="img-responsive"/>
-        </div>
-    </div>
-{% endblock %}
 </html>
+
+.overlay_image img {
+display: block;
+}
+.overlay_image span {
+background-color: #000000;
+position: absolute;
+bottom: 0;
+width: 100%;
+line-height: 2em;
+text-align: center;
+}
