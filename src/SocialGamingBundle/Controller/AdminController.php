@@ -9,9 +9,11 @@
 namespace SocialGamingBundle\Controller;
 
 
+use DateTimeTypeInterface;
 use SocialGamingBundle\Entity\Episode;
 use SocialGamingBundle\Entity\Show;
 use SocialGamingBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -19,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Tests\Fixtures\Entity;
 
 class AdminController extends Controller
 {
@@ -81,9 +84,17 @@ class AdminController extends Controller
         $episode=new Episode();
         $episodeForm=$this->createFormBuilder($episode)
             ->add('name',TextType::class)
-            ->add('startdate',DateTimeType::class)
-            ->add('enddate',DateTimeType::class)
-            ->add('summery',TextType::class)
+            ->add('startdate', DateTimeType::class,array(
+                'input'=>'timestamp',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
+            ))
+            ->add('enddate', DateTimeType::class, array(
+                'input'=>'timestamp',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
+            ))
+            ->add('summary',TextType::class)
 
             ->getForm();
 
