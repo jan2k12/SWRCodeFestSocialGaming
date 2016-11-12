@@ -49,7 +49,7 @@ file, suffixed by ``.dist``. This can be changed in the configuration:
     "extra": {
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
-            "dist-file": "some/other/folder/to/other/parameters/file/parameters.yml.dist"
+            "dist-file": parameters.yml
         }
     }
 }
