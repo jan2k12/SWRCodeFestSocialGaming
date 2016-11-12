@@ -3,7 +3,7 @@
 namespace SocialGamingBundle\Entity;
 
 /**
- * Show
+ * Shows
  */
 class Show
 {
@@ -52,4 +52,3 @@ class Show
         return $this->name;
     }
 }
-
