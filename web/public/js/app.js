@@ -4,7 +4,15 @@
 
 var app = {
     init: function(){
-        console.log("init app...");
+        window.onhashchange = function(){
+            var currentHash = window.location.hash;
+            if(currentHash.length > 0){
+                currentHash = currentHash.substr(1);
+                app.navigateTo(currentHash);
+            }
+        };
+
+        window.onhashchange();
     },
 
     navigateTo: function(relativePath){
