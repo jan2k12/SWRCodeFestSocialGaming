@@ -2,6 +2,8 @@
 
 namespace SocialGamingBundle\Entity;
 
+use Symfony\Component\Validator\Constraints\DateTime;
+
 /**
  * Episode
  */
@@ -48,6 +50,8 @@ class Episode
     public function __construct()
     {
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->startdate = new \DateTime();
+        $this->enddate = new \DateTime();
     }
 
     /**
@@ -159,11 +163,11 @@ class Episode
     /**
      * Set show
      *
-     * @param \SocialGamingBundle\Entity\Show $show
+     * @param \SocialGamingBundle\Entity\Tvshow $show
      *
      * @return Episode
      */
-    public function setShow(\SocialGamingBundle\Entity\Show $show = null)
+    public function setShow(\SocialGamingBundle\Entity\Tvshow $show = null)
     {
         $this->show = $show;
 
@@ -173,7 +177,7 @@ class Episode
     /**
      * Get show
      *
-     * @return \SocialGamingBundle\Entity\Show
+     * @return \SocialGamingBundle\Entity\Tvshow
      */
     public function getShow()
     {
@@ -212,5 +216,10 @@ class Episode
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

@@ -36,22 +36,15 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3">
-            MENU:
-        </div>
-        <div class="col-md-3">
-            <div class="menuItem" onclick="app.navigateTo('/admin')">ADMIN</div>
-        </div>
-        <div class="col-md-3">
-            <div class="menuItem" onclick="app.navigateTo('/admin/user/create')">CREATE USER</div>
-        </div>
-        <div class="col-md-3">
-            <div class="menuItem" onclick="app.navigateTo('/admin/show/create')">CREATE SHOW</div>
+        <div class="col-md-12">
+            {% include 'SocialGamingBundle:Frontend:menu.html.twig' %}
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div id="content">CONTENT</div>
+            <div class="panel-default">
+                <div class="panel-body" id="content">CONTENT</div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -61,4 +54,30 @@
     </div>
 </div>
 </body>
+{% if errors is defined %}
+    {% for error  in errors %}
+        <p>
+            {{ error }}
+        </p>
+    {% endfor %}
+{% endif %}
+{% block content %}
+
+
+    {% for show in shows %}
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{ show.name }} </h2>
+
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <img src="{asset('public/img/tatortImage.png')}" class="img-responsive"/>
+        </div>
+    </div>
+{% endblock %}
 </html>

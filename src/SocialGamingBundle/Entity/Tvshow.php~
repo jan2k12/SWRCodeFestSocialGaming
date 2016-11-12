@@ -3,9 +3,9 @@
 namespace SocialGamingBundle\Entity;
 
 /**
- * Shows
+ * Tvshow
  */
-class Show
+class Tvshow
 {
     /**
      * @var integer
@@ -33,7 +33,7 @@ class Show
      *
      * @param string $name
      *
-     * @return Show
+     * @return Tvshow
      */
     public function setName($name)
     {
@@ -48,6 +48,11 @@ class Show
      * @return string
      */
     public function getName()
+    {
+        return $this->name;
+    }
+
+    public function __toString()
     {
         return $this->name;
     }
