@@ -130,4 +130,10 @@ class FrontendController extends Controller
 
 
     }
+
+    public function highscoreAction($userId=null){
+        if(!is_null($userId)){
+            $user=$
+        }
+    }
 }

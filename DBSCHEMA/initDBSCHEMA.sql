@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`user_score` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `userId` VARCHAR(45) NOT NULL,
   `score` INT NOT NULL,
+  `episodeId` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
