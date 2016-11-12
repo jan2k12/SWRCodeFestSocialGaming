@@ -2,7 +2,7 @@
     <div class="episode-site">
     <div class="row headline-episode">
         <div class="col-md-2 col-xs-2 col-md-offset-2">
-            <img style="max-width:50px;" src="{{ asset('public/img/fingerabdruck.png') }}" class="img-responsive thumb" alt="hier ist der Daumen">
+            <img style="max-width:50px;" src="{{ asset('public/gfx/fingerabdruck.png') }}" class="img-responsive thumb" alt="hier ist der Daumen">
         </div>
         <div class="col-md-8 col-xs-10">
             {{ show.name }} - {{ episode.name }}
@@ -18,15 +18,13 @@
     </div>
     <br/>
     <div class="row">
-        <div class="col-md-12">
-        <div id="hints" class="hints collapse">
+        <div class="col-md-8 col-md-offset-2">
+            <div id="hints" style="font-size: 1.5em" class="hints collapse">
+            <ol>
         {%  for hint in hints %}
-            <div class="row">
-                <div class="col-md-7 col-md-offset-3">
-                    {{ hint.text }}
-                </div>
-            </div>
+        <li>{{ hint.text }}</li>
         {% endfor %}
+            </ol>
         </div>
         </div>
     </div>

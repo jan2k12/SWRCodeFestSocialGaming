@@ -1,3 +1,12 @@
+.app-titlebar{
+    position:relative;
+    z-index:1000;
+    left:0;
+    top:0;
+    margin:0;
+    padding:0;
+}
+
 .app-menu-user {
     display: none;
 }
@@ -7,6 +16,7 @@
 
 #app-menu{
     position:absolute;
+    top:65px;
     left:0;
     display:none;
     z-index:1000;
@@ -37,16 +47,16 @@
 
 }
 
-#app-menu a:link,
-#app-menu a:visited,
-#app-menu a:hover,
-#app-menu a:focus{
+a:link,
+a:visited,
+a:hover,
+a:focus{
     color: #ffffff;
     text-decoration: none;
 }
 
 
-#app-menu a:hover {
+a:hover {
     color: #991420;
 }
 
@@ -70,20 +80,9 @@
     left:10px;
 }
 
-#app-menu-icon {
+#app-menu-icon-closed,
+#app-menu-icon-opened{
     cursor: pointer;
-    width: 72px;
-    height: 72px;
-    padding: 10px;
-    vertical-align: top;
-    margin:0;
-    position:relative;
-    left:15px;
-    z-index:1000;
-}
-
-.app-menu-icon-opened {
-    background-color:#292929;
 }
 
 .app-menu-divider{
@@ -111,7 +110,10 @@ h2, h3 {
     font-family: 'Fredoka One', cursive;
     font-weight: bold;
     font-size: 3.5em;
+    vertical-align:middle;
     margin-left: 20px;
+    position:relative;
+    top:5px;
 }
 
 .highlighted-content {
@@ -130,13 +132,6 @@ h2, h3 {
 .note_textarea {
     background-color: #b6b6b6;
     color:#292929;
-}
-#app-menu{
-    position:absolute;
-    left:0;
-    display:none;
-    z-index:1000;
-    font-size: 1.8em;
 }
 
 #app-menu-cover-area{
@@ -162,11 +157,12 @@ h2, h3 {
     padding-left:30px;
 
 }
-
+#app-menu a,
 #app-menu a:link,
 #app-menu a:visited,
 #app-menu a:hover,
 #app-menu a:focus{
+    cursor:pointer;
     color: #ffffff;
     text-decoration: none;
 }
@@ -188,20 +184,6 @@ h2, h3 {
     height: 64px;
 }
 
-#app-menu-icon {
-    cursor: pointer;
-    width: 72px;
-    height: 72px;
-    padding: 10px;
-    vertical-align: top;
-    margin:0;
-    z-index:1000;
-}
-
-.app-menu-icon-opened {
-    background-color:#292929;
-}
-
 .embedded-login-form{
     display:none;
     position:relative;
@@ -212,7 +194,7 @@ h2, h3 {
 .embedded-login-form input,
 .embedded-login-form button{
     margin-bottom:10px;
-    width:200px;
+    width:190px;
 }
 
 .embedded-login-form input:focus{
@@ -239,6 +221,7 @@ body, html {
 
 
 body {
+    font-size:13px;
     background-color: #464646;
     font-family: 'Open Sans', sans-serif;
     color:#ffffff;
