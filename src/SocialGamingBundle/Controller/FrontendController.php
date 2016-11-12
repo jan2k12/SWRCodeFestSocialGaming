@@ -9,7 +9,7 @@ namespace SocialGamingBundle\Controller;
 
 
 use SocialGamingBundle\Entity\Suspect;
-use SocialGamingBundle\Model\TvShowModel;
+use SocialGamingBundle\Entity\TvShowModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +23,7 @@ class FrontendController extends Controller
     }
 
     public function startFrontAction(Request $request){
+        return $this->render('SocialGamingBundle:Frontend:startFront.html.twig');
 
     }
     public function suspectFrontAction(Request $request){
@@ -43,9 +44,9 @@ class FrontendController extends Controller
             $em->persist($episode);
             $em->flush();
 
-            return $this->render('SocialGamingBundle:Default:suspectFront.html.twig',array('suspectForm'=>$suspectFrontForm->createView(),'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig',array('suspectForm'=>$suspectFrontForm->createView(),'errors'=>$errors));
         }
-        return $this->render('SocialGamingBundle:Default:suspectFront.html.twig',array('suspectFrontForm'=>$suspectFrontForm->createView()));
+        return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig',array('suspectFrontForm'=>$suspectFrontForm->createView()));
 
 
     }
@@ -68,9 +69,9 @@ class FrontendController extends Controller
             $em->persist($result);
             $em->flush();
 
-            return $this->render('SocialGamingBundle:Default:result.html.twig',array('resultForm'=>$resultForm->createView(),'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Frontend:result.html.twig',array('resultForm'=>$resultForm->createView(),'errors'=>$errors));
         }
-        return $this->render('SocialGamingBundle:Default:result.html.twig',array('resultFrontForm'=>$resultForm->createView()));
+        return $this->render('SocialGamingBundle:Frontend:result.html.twig',array('resultForm'=>$resultForm->createView()));
 
     }
 

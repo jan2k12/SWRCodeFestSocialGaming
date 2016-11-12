@@ -32,12 +32,11 @@ body {
     color:#292929;
 }
 
-.overlay_image {
+.overlay_text {
     background-color: hsla(0, 0%, 0%, 0.66);
+    color: #FFFFFF;
 }
-overlay_text {
-    background-color:#ffffff;
-}
+
 .overlay_popup{
     hsla(0, 0%, 16%, 0.63);
 }
