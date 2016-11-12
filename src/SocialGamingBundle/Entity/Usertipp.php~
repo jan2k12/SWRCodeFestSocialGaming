@@ -110,3 +110,4 @@ class Usertipp
         return $this->date;
     }
 }
+
