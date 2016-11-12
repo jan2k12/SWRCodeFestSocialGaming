@@ -9,6 +9,7 @@
 namespace SocialGamingBundle\Controller;
 
 
+use Doctrine\ORM\EntityRepository;
 use SocialGamingBundle\Entity\Episode;
 use SocialGamingBundle\Entity\Hint;
 use SocialGamingBundle\Entity\Show;
@@ -95,17 +96,13 @@ class AdminController extends Controller
 
             ->add('name',TextType::class ,array('attr'=> array('class'=>'form-control' )))
             ->add('summary',TextType::class,array('attr'=> array('class'=>'form-control' )))
-            ->add('startdate', DateTimeType::class,array(
-                'input'=>'timestamp',
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd HH:mm',
-                'attr'=> array('class'=>'form-control' )
-            ))
-            ->add('enddate', DateTimeType::class, array(
-                'input'=>'timestamp',
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd HH:mm',
-                'attr'=> array('class'=>'form-control' )
+            ->add('startdate', DateTimeType::class)
+            ->add('enddate', DateTimeType::class)
+            ->add('show', EntityType::class,array(
+                'class'=>'SocialGamingBundle:Tvshow',
+                'query_builder'=>function(EntityRepository $er){
+                    return null;
+                }
             ))
 
             ->add('save',SubmitType::class,array('attr'=> array('class'=>'form-control' )))
@@ -133,11 +130,12 @@ class AdminController extends Controller
         $hint=new Hint();
         $hintForm=$this->createFormBuilder($hint)
             ->add('text',TextType::class ,array('attr'=> array('class'=>'form-control' )))
-            ->add('date', DateTimeType::class,array(
-                'input'=>'timestamp',
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd HH:mm:ss',
-                 'attr'=> array('class'=>'form-control' )))
+            ->add('date', DateTimeType::class)
+            ->add('episode', EntityType::class,array(
+                'class'=>'SocialGamingBundle:Episode',
+                'query_builder'=>function(EntityRepository $er){
+                    return null;
+                }))
             ->add('save',SubmitType::class ,array('attr'=> array('class'=>'form-control' )))
             ->getForm();
 

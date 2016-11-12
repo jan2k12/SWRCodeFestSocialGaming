@@ -35,7 +35,7 @@ class Hint
      */
     public function __construct()
     {
-        $this->date=time();
+        $this->date=new \DateTime();
     }
 
     public function getId()
