@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 layout.setRefreshing(false);
             }
         });
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://192.168.206.8");
 
         layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
