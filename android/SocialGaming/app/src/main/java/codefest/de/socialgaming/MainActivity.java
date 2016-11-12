@@ -79,11 +79,10 @@ public class MainActivity extends AppCompatActivity {
         pullTimer.schedule(new TimerTask() {
             private void checkNotifications() {
                 try {
-                    InputStream inputStream = (new URL("http://" + server + "/android/getHints/json")).openStream();
+                    InputStream inputStream = (new URL("http://" + server + "/android/getHints")).openStream();
                     Scanner s = new Scanner(inputStream).useDelimiter("\\A");
                     String string = s.hasNext() ? s.next() : "";
-                    JSONObject json = new JSONObject(string);
-                    JSONArray notificationArray = json.getJSONArray("notifications");
+                    JSONArray notificationArray = new JSONArray(string);
                     for (int i = 0; i < notificationArray.length(); i++) {
                         JSONObject n = notificationArray.getJSONObject(i);
                         String hint = n.getString("hint");
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.sendNotification(0, "Stopped", "");
                 MainActivity.this.pullTimer.cancel();
             }
-        }, 60000);
+        }, 3600000);
         FirebaseMessaging.getInstance().subscribeToTopic("all");
     }
 
