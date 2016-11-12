@@ -103,7 +103,7 @@ class FrontendController extends Controller
 
             return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig',array('user'=>$user,'errors'=>$errors));
         }
-         return $this->render('SocialGamingBundle:Frontend:episode.html.twig',array('suspectForm'=>$suspectForm->createView(),'hints'=>$hints,'show'=>$show,'episode'=>$episode));
+         return $this->render('SocialGamingBundle:Frontend:episode.html.twig',array('suspectForm'=>$suspectForm->createView(),'hints'=>$hints,'show'=>$show,'episode'=>$episode,'suspects'=>$suspects));
     }
 
     public function suspectFrontAction(Request $request){

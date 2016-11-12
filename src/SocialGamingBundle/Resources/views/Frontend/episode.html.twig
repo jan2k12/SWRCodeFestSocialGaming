@@ -1,14 +1,16 @@
 {% block content %}
+    <div class="episode-site">
     <div class="row headline-episode">
-        <div class="col-md-2 col-xs-2">
+        <div class="col-md-2 col-xs-2 col-md-offset-2">
             <img style="max-width:50px;" src="{{ asset('public/img/fingerabdruck.png') }}" class="img-responsive thumb" alt="hier ist der Daumen">
         </div>
-        <div class="col-md-10 col-xs-10">
+        <div class="col-md-8 col-xs-10">
             {{ show.name }} - {{ episode.name }}
         </div>
     </div>
+    <br/>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10 col-md-offset-2">
             <a href="#hints" class="accordion" data-toggle="collapse">
                 <span class="hint-text-head">Alle Hinweise <span class="glyphicon glyphicon-chevron-down"></span> </span>
             </a>
@@ -20,7 +22,7 @@
         <div id="hints" class="hints collapse">
         {%  for hint in hints %}
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-7 col-md-offset-3">
                     {{ hint.text }}
                 </div>
             </div>
@@ -29,9 +31,33 @@
         </div>
     </div>
     <br/>
-    {{ form_start(suspectForm, {'attr': {'id': 'form_user_tip'}}) }}
-    {{ form_widget(suspectForm) }}
-    {{ form_end(suspectForm) }}
+    <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+    {%  for suspect in suspects %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 suspect-img-cnt">
+                <span data-value="{{ suspect.id }}" class="clickable-suspect">
+                    <div class="suspect-overlay_text">{{ suspect.name }}</div>
+                    <img src="{{ asset('public/img/'~ suspect.imagepath) }}" class="img-responsive " />
+                </span>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    {% endfor %}
+
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {{ form_start(suspectForm, {'attr': {'id': 'form_user_tip'}}) }}
+            {{ form_widget(suspectForm) }}
+        </div>
+    </div>
+        <br />
+            {{ form_end(suspectForm) }}
+    </div>
+    </div>
+    </div>
 {% endblock %}
 <script>
     $(document).ready(function(){
@@ -63,7 +89,19 @@
 
         })
 
-        $('#form_suspectId > label').after('<br/>')
+        $('#form_suspectId > label').after('<br/>');
+        $('#form_save').addClass('votebtn');
+        $('#form').find('label').css('visibility','hidden');
+        $('.clickable-suspect').click(function(){
+            $('.clickable-suspect').each(function(){
+               $(this).removeClass('redborder');
+            });
+            var val=$(this).data('value');
+            $(this).addClass('redborder');
+            $('#form_suspectId_'+val).prop('checked',true);
+        })
+
+
     })
 
 

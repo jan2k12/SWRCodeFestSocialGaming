@@ -24,10 +24,9 @@ SocialGamingBundle\Entity\UserScore:
             options:
                 unsigned: false
         episodeid:
-            type: string
+            type: integer
             nullable: false
-            length: 45
             options:
-                fixed: false
+                unsigned: false
             column: episodeId
     lifecycleCallbacks: {  }
