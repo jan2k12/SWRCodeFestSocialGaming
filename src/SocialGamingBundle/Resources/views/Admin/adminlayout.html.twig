@@ -34,10 +34,13 @@
 </head>
 
 <body>
-
-{% if errors is defined%}
-    <p>{{ errors }}</p>
-{% endif  %}
+{% if errors is defined %}
+    {% for error  in errors %}
+        <p>
+            {{ error }}
+        </p>
+    {% endfor %}
+{% endif %}
 {% block content %}
 
 {% endblock %}

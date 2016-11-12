@@ -41,7 +41,7 @@ SocialGamingBundle\Entity\Episode:
                 fixed: false
     manyToOne:
         show:
-            targetEntity: Show
+            targetEntity: Tvshow
             cascade: {  }
             fetch: LAZY
             mappedBy: null

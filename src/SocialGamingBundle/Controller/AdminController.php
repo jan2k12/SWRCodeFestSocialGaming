@@ -13,6 +13,7 @@ use SocialGamingBundle\Entity\Episode;
 use SocialGamingBundle\Entity\Hint;
 use SocialGamingBundle\Entity\Show;
 use SocialGamingBundle\Entity\Suspect;
+use SocialGamingBundle\Entity\Tvshow;
 use SocialGamingBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -48,10 +49,13 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $errors=array();
             $user = $form->getData();
-
+            try{
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            }catch(\Exception $ex){
+                $errors[] =$ex->getMessage();
+            }
 
             return $this->render('SocialGamingBundle:Admin:user.html.twig',array('userForm'=>$userForm->createView(),'errors'=>$errors));
         }
@@ -61,7 +65,7 @@ class AdminController extends Controller
     }
 
     public function createShowAction(Request $request){
-        $show=new Show();
+        $show=new Tvshow();
         $showForm=$this->createFormBuilder($show)
 
             ->add('name',TextType::class , array  ('attr'=> array('class'=>'form-control' )))

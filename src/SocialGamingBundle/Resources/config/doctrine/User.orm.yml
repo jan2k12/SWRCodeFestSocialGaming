@@ -31,12 +31,6 @@ SocialGamingBundle\Entity\User:
             type: boolean
             nullable: true
             column: isActive
-        userSuspectId:
-            type: integer
-            nullable: true
-            options:
-                unsigned: false
-            column: user_suspect_id
     manyToMany:
         suspect:
             targetEntity: Suspect
