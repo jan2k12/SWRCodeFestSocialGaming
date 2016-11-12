@@ -42,13 +42,19 @@ class FrontendController extends Controller
     public function episodeViewAction($episodeId,Request $request){
         $episode=$this->getDoctrine()->getRepository('SocialGamingBundle:Episode')->find($episodeId);
         $show=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->find($episode->getShow()->getId());
-        $hints=$this->getDoctrine()->getEntityManager()->createQuery('SELECT h from SocialGamingBundle:Hint as h where h.episode=:episode')->setParameter('episode',$episodeId)->getResult();
+        $allHints=$this->getDoctrine()->getEntityManager()->createQuery('SELECT h from SocialGamingBundle:Hint as h where h.episode=:episode')->setParameter('episode',$episodeId)->getResult();
         $suspects=$this->getDoctrine()->getEntityManager()->createQuery('SELECT s from SocialGamingBundle:Suspect as s where s.episode=:episode')->setParameter('episode',$episodeId)->getResult();
         $user=$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find(1);
         $userTipp=new Usertipp();
         $userTipp->setUserid($user->getId());
         $userTipp->setDate(new \DateTime());
 
+        $hints = array();
+        foreach ($allHints as $hint) {
+            if ($hint->getDate() < new \DateTime()) {
+                array_push($hints, $hint);
+            }
+        }
 
         $suspectForm=$this->createFormBuilder($userTipp)->add('suspectId',EntityType::class,array(
             'class'=>'SocialGamingBundle:Suspect',
@@ -68,12 +74,8 @@ class FrontendController extends Controller
             $userScore = new UserScore();
             $userScore->setUserid($userTipp->getUserid());
             $userScore->setEpisodeid($episode->getId());
-            $numHits = 0;
-            foreach ($hints as $hint) {
-                if ($hint->getDate() < new DateTime()) {
-                    $numHits ++;
-                }
-            }
+            $numHits = sizeof($hints);
+
             if ($userTipp->getSuspectid()->getGuilty()) {
                 $duration = $episode->getEnddate()->getTimestamp()
                     - $episode->getStartdate()->getTimestamp();
