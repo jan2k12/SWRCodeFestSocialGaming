@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `socialgaming`.`episode` ;
 CREATE TABLE IF NOT EXISTS `socialgaming`.`episode` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `startDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `startDate` DATETIME NOT NULL,
   `endDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `summary` VARCHAR(45) NULL,
   `show_id` INT NOT NULL,
@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `socialgaming`.`user_score` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `userId` VARCHAR(45) NOT NULL,
   `score` INT NOT NULL,
+  `episodeId` INT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

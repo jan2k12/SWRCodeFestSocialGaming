@@ -11,6 +11,7 @@ namespace SocialGamingBundle\Controller;
 use SocialGamingBundle\Entity\Suspect;
 use SocialGamingBundle\Entity\User;
 use SocialGamingBundle\Entity\Usertipp;
+use SocialGamingBundle\Entity\UserScore;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -25,7 +26,9 @@ class FrontendController extends Controller
         $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
         return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows));
     }
-
+    public  function infoAction(){
+       return $this->render('SocialGamingBundle:Frontend:info.html.twig');
+    }
 
     public function startFrontAction(){
         $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
@@ -39,13 +42,19 @@ class FrontendController extends Controller
     public function episodeViewAction($episodeId,Request $request){
         $episode=$this->getDoctrine()->getRepository('SocialGamingBundle:Episode')->find($episodeId);
         $show=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->find($episode->getShow()->getId());
-        $hints=$this->getDoctrine()->getEntityManager()->createQuery('SELECT h from SocialGamingBundle:Hint as h where h.episode=:episode')->setParameter('episode',$episodeId)->getResult();
+        $allHints=$this->getDoctrine()->getEntityManager()->createQuery('SELECT h from SocialGamingBundle:Hint as h where h.episode=:episode')->setParameter('episode',$episodeId)->getResult();
         $suspects=$this->getDoctrine()->getEntityManager()->createQuery('SELECT s from SocialGamingBundle:Suspect as s where s.episode=:episode')->setParameter('episode',$episodeId)->getResult();
         $user=$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find(1);
         $userTipp=new Usertipp();
         $userTipp->setUserid($user->getId());
         $userTipp->setDate(new \DateTime());
 
+        $hints = array();
+        foreach ($allHints as $hint) {
+            if ($hint->getDate() < new \DateTime()) {
+                array_push($hints, $hint);
+            }
+        }
 
         $suspectForm=$this->createFormBuilder($userTipp)->add('suspectId',EntityType::class,array(
             'class'=>'SocialGamingBundle:Suspect',
@@ -61,13 +70,35 @@ class FrontendController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $errors=array();
             $userTipp = $form->getData();
+
+            $userScore = new UserScore();
+            $userScore->setUserid($userTipp->getUserid());
+            $userScore->setEpisodeid($episode->getId());
+            $numHits = sizeof($hints);
+
+            if ($userTipp->getSuspectid()->getGuilty()) {
+                $duration = $episode->getEnddate()->getTimestamp()
+                    - $episode->getStartdate()->getTimestamp();
+                $guesstime = $userTipp->getDate()->getTimestamp()
+                    - $episode->getStartdate()->getTimestamp();
+                $timeratio = $guesstime / $duration;
+                if ($timeratio < 0) {
+                    throw new \Exception('Event not started');
+                } else {
+                    $userScore->setScore(100*(10-$numHits-5*$timeratio));
+                }
+            } else {
+                $userScore->setScore(0);
+            }
+
             $userTipp->setSuspectId($userTipp->getSuspectId()->getId());
             try{
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($userTipp);
+                $em->persist($userScore);
                 $em->flush();
-            }catch(\Exception $ex){
-                $errors[] =$ex->getMessage();
+            } catch(\Exception $ex) {
+                $errors[] = $ex->getMessage();
             }
 
             return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig',array('user'=>$user,'errors'=>$errors));
@@ -129,5 +160,10 @@ class FrontendController extends Controller
         return $this->render('SocialGamingBundle:Frontend:impressum.html.twig',array());
 
 
+    }
+
+    public function highscoreAction($userId=null){
+
+            return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array());
     }
 }

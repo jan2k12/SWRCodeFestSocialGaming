@@ -80,4 +80,33 @@ class UserScore
     {
         return $this->score;
     }
+    /**
+     * @var string
+     */
+    private $episodeid;
+
+
+    /**
+     * Set episodeid
+     *
+     * @param string $episodeid
+     *
+     * @return UserScore
+     */
+    public function setEpisodeid($episodeid)
+    {
+        $this->episodeid = $episodeid;
+
+        return $this;
+    }
+
+    /**
+     * Get episodeid
+     *
+     * @return string
+     */
+    public function getEpisodeid()
+    {
+        return $this->episodeid;
+    }
 }
