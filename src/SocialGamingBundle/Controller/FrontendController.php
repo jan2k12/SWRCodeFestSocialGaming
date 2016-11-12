@@ -61,6 +61,20 @@ class FrontendController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $errors=array();
             $userTipp = $form->getData();
+
+            $userScore = new UserScore;
+            $userScore->setUserid($userTipp->getUserid());
+            $userScore->setEpisodeid($episode->getId());
+            if ($userTipp->getSuspectid()->getGuilty()) {
+                $duration = strtotime($episode->getEnddate())
+                    - strtotime($episode->getStartdate());
+                $guesstime = strtotime($userTipp->getDate())
+                    - strtotime($episode->getStartdate());
+                $timeratio = $guesstime / $duration;
+            } else {
+                $userScore->setScore(0);
+            }
+
             $userTipp->setSuspectId($userTipp->getSuspectId()->getId());
             try{
                 $em = $this->getDoctrine()->getManager();
