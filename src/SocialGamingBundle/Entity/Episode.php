@@ -1,6 +1,7 @@
 <?php
 
 namespace SocialGamingBundle\Entity;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Episode
@@ -48,6 +49,8 @@ class Episode
     public function __construct()
     {
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->startdate=time();
+        $this->enddate=time();
     }
 
     /**

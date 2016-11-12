@@ -1,6 +1,9 @@
 {% extends 'SocialGamingBundle:Admin:adminlayout.html.twig' %}
 {% block content %}
+
 {{ form_start(userForm) }}
-{{ form_widget(userForm) }}
+    <div class="col-md-4"  >
+    {{ form_widget(userForm) }}
+</div>
 {{ form_end(userForm) }}
 {% endblock %}

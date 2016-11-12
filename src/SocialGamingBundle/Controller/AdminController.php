@@ -14,6 +14,7 @@ use SocialGamingBundle\Entity\Hint;
 use SocialGamingBundle\Entity\Show;
 use SocialGamingBundle\Entity\Suspect;
 use SocialGamingBundle\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -21,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Tests\Fixtures\Entity;
 
 class AdminController extends Controller
 {
@@ -32,11 +34,13 @@ class AdminController extends Controller
 
         $user=new User();
         $userForm=$this->createFormBuilder($user)
-        ->add('username',TextType::class)
-        ->add('email',EmailType::class)
-        ->add('isActive',CheckboxType::class)
-        ->add('save',SubmitType::class)
+
+        ->add('username',TextType::class, array  ('attr'=> array('class'=>'form-control' )))
+        ->add('email',EmailType::class, array  ('attr'=> array('class'=>'form-control')))
+        ->add('isActive',CheckboxType::class, array  ('attr'=> array('class'=>'form-control')))
+        ->add('save',SubmitType::class, array  ('attr'=> array('class'=>'form-control')))
         ->getForm();
+
 
 
         $form=$userForm->handleRequest($request);
@@ -59,8 +63,9 @@ class AdminController extends Controller
     public function createShowAction(Request $request){
         $show=new Show();
         $showForm=$this->createFormBuilder($show)
-            ->add('name',TextType::class)
-            ->add('save',SubmitType::class)
+
+            ->add('name',TextType::class , array  ('attr'=> array('class'=>'form-control' )))
+            ->add('save',SubmitType::class ,array  ('attr'=> array('class'=>'form-control' )))
             ->getForm();
 
 
@@ -83,11 +88,25 @@ class AdminController extends Controller
     public function createEpisodeAction(Request $request){
         $episode=new Episode();
         $episodeForm=$this->createFormBuilder($episode)
-            ->add('name',TextType::class)
-            ->add('startdate',DateTimeType::class)
-            ->add('enddate',DateTimeType::class)
-            ->add('summery',TextType::class)
-            ->add('save',SubmitType::class)
+
+            ->add('name',TextType::class ,array('attr'=> array('class'=>'form-control' )))
+            ->add('summary',TextType::class,array('attr'=> array('class'=>'form-control' )))
+            ->add('startdate', DateTimeType::class,array(
+                'input'=>'timestamp',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd HH:mm',
+                'attr'=> array('class'=>'form-control' )
+            ))
+            ->add('enddate', DateTimeType::class, array(
+                'input'=>'timestamp',
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd HH:mm',
+                'attr'=> array('class'=>'form-control' )
+            ))
+
+            ->add('save',SubmitType::class,array('attr'=> array('class'=>'form-control' )))
+
+
             ->getForm();
 
 
@@ -109,12 +128,13 @@ class AdminController extends Controller
     public function createHintAction(Request $request){
         $hint=new Hint();
         $hintForm=$this->createFormBuilder($hint)
-            ->add('text',TextType::class)
+            ->add('text',TextType::class ,array('attr'=> array('class'=>'form-control' )))
             ->add('date', DateTimeType::class,array(
                 'input'=>'timestamp',
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd HH:mm:ss'))
-            ->add('save',SubmitType::class)
+                'format' => 'yyyy-MM-dd HH:mm:ss',
+                 'attr'=> array('class'=>'form-control' )))
+            ->add('save',SubmitType::class ,array('attr'=> array('class'=>'form-control' )))
             ->getForm();
 
 
@@ -136,10 +156,10 @@ class AdminController extends Controller
     public function createSuspectAction(Request $request){
         $suspect=new Suspect();
         $suspectForm=$this->createFormBuilder($suspect)
-            ->add('name',TextType::class)
-            ->add('guilty',CheckboxType::class)
-            ->add('imagepath',TextType::class)
-            ->add('save',SubmitType::class)
+            ->add('name',TextType::class  ,array('attr'=> array('class'=>'form-control' )))
+            ->add('guilty',CheckboxType::class  ,array('attr'=> array('class'=>'form-control')))
+            ->add('imagepath',TextType::class  ,array('attr'=> array('class'=>'form-control' )))
+            ->add('save',SubmitType::class  ,array('attr'=> array('class'=>'form-control' )))
             ->getForm();
 
 
