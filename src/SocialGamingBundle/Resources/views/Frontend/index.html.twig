@@ -1,4 +1,19 @@
 {% block content %}
-    <br/>
+
+    {% for show in shows %}
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{ show.name }} </h2>
+
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <img src="{asset('public/img/tatortImage.png')}" class="img-responsive"/>
+        </div>
+    </div>
 
 {% endblock %}
