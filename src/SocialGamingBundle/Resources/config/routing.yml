@@ -10,3 +10,6 @@ social_gaming_backend_create_user:
 social_gaming_backend_create_show:
     path: /admin/show/create
     defaults: { _controller: SocialGamingBundle:Admin:createShow }
+social_gaming_backend_create_episode:
+    path: /admin/episode/create
+    defaults: { _controller: SocialGamingBundle:Admin:createEpisode }
