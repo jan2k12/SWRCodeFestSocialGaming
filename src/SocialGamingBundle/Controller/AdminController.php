@@ -59,7 +59,22 @@ class AdminController extends Controller
                 $errors[] =$ex->getMessage();
             }
 
-            return $this->render('SocialGamingBundle:Admin:user.html.twig',array('userForm'=>$userForm->createView(),'errors'=>$errors));
+            $success=false;
+            if(count($errors)==0){
+                $success=true;
+            }
+            unset($user);
+            unset($userForm);
+            $user=new User();
+            $userForm=$this->createFormBuilder($user)
+
+                ->add('username',TextType::class, array  ('attr'=> array('class'=>'form-control' )))
+                ->add('email',EmailType::class, array  ('attr'=> array('class'=>'form-control')))
+                ->add('isActive',CheckboxType::class, array  ('attr'=> array('class'=>'form-control')))
+                ->add('save',SubmitType::class, array  ('attr'=> array('class'=>'form-control')))
+                ->getForm();
+
+            return $this->render('SocialGamingBundle:Admin:user.html.twig',array('userForm'=>$userForm->createView(),'errors'=>$errors,'success'=>$success));
         }
 
         return $this->render('SocialGamingBundle:Admin:user.html.twig',array('userForm'=>$userForm->createView()));
