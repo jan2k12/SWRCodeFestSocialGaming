@@ -3,6 +3,7 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: socialgaming
+
     database_user: jan
     database_password: jan
     mailer_transport: smtp
@@ -10,4 +11,3 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: 097175165be268515c659658dd7147e83605f0c0
-
