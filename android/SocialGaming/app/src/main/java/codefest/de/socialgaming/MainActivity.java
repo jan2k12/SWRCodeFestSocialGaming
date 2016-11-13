@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 checkNotifications();
             }
         }, 0, 10 * 60 * 1000);
-        
+
     }
     private static int currentIndex = 0;
 
