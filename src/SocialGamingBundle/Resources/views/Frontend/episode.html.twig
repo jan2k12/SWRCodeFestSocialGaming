@@ -64,14 +64,19 @@
     </div>
 
 </div>
-
 {% endblock %}
 
 <script>
-    {% if (alreadyVoted==true)%}
+    {% if alreadyVoted %}
+    var alreadyVoted=true;
+    {% else %}
+    var alreadyVoted=false;
+    {% endif %}
+    $(document).ready(function(){
+    {% if alreadyVoted %}
         $('#form_Einreichen').attr('disabled','disabled').addClass('disabled').addClass('btn').before('<span class="col-xs-12 col-md-12" style="text-align: center;font-size:2.2em;"> <strong>Sie haben schon abgestimmt</strong></span>');
     {%  endif %}
-    $(document).ready(function(){
+
 
         $('#form_Einreichen').click(function (ev) {
             var suspectId = $('input[type=radio]:checked', "#form_suspectId").val();
@@ -119,7 +124,9 @@
             });
             var val=$(this).data('value');
             $(this).addClass('selectedSuspect');
+            if(!alreadyVoted){
             $('#form_Einreichen').removeAttr('disabled').removeClass('disabled');
+            }
             $('#form_suspectId_'+val).prop('checked',true);
         })
 

@@ -125,10 +125,10 @@ class FrontendController extends Controller
 
     public function afterVotingAction ($suspectId){
 
-        $supsepct = $episode = $this->getDoctrine()->getRepository('SocialGamingBundle:Suspect')->find($suspectId);
+        $suspect =$this->getDoctrine()->getRepository('SocialGamingBundle:Suspect')->find($suspectId);
 
         return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig', array(
-            'suspect' => $supsepct,
+            'suspect' => $suspect,
             'loggedIn' => $_SESSION["loggedIn"],
         ));
     }
