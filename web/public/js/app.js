@@ -34,6 +34,7 @@ var app = {
 
         navigateTo: function (relativePath) {
                 $("#content").load(relativePath, function(){
+                        $("html,body").animate({scrollTop: 0}, 1000);
                 });
 
         },

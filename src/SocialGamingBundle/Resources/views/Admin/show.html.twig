@@ -1,8 +1,15 @@
 {% extends 'SocialGamingBundle:Admin:adminlayout.html.twig' %}
 {% block content %}
-    {{ form_start(showForm) }}
-    <div class="col-md-4"  >
-    {{ form_widget(showForm) }}
+    <div class="row">
+        <div class="col-md-5 col-md-offset-2">
+            {{ form_start(showForm) }}
+            {{ form_widget(showForm) }}
+            {{ form_end(showForm) }}
+        </div>
     </div>
-    {{ form_end(showForm) }}
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('social_gaming_backend') }}" >Zurück zur Übersicht</a>
+        </div>
+    </div>
 {% endblock %}

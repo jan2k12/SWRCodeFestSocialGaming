@@ -74,7 +74,6 @@
     $(document).ready(function(){
 
         $('#form_Einreichen').click(function (ev) {
-            ev.preventDefault();
             var suspectId = $('input[type=radio]:checked', "#form_suspectId").val();
             app.navigateTo("frontend/afterVoting/" +suspectId);
         });

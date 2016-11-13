@@ -1,9 +1,20 @@
 {% extends 'SocialGamingBundle:Admin:adminlayout.html.twig' %}
 {% block content %}
+    {% if success %}
+        <div class="alert alert-success" role="alert">Episode angelegt!</div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-5 col-md-offset-2">
+            {{ form_start(episodeForm) }}
 
-    {{ form_start(episodeForm) }}
-    <div class="col-md-4"  >
-        {{ form_widget(episodeForm) }}
+            {{ form_widget(episodeForm) }}
+
+            {{ form_end(episodeForm) }}
+        </div>
     </div>
-    {{ form_end(episodeForm) }}
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('social_gaming_backend') }}">Zurück zur Übersicht</a>
+        </div>
+    </div>
 {% endblock %}

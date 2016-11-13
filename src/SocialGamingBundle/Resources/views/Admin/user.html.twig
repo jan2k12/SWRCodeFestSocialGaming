@@ -1,9 +1,22 @@
 {% extends 'SocialGamingBundle:Admin:adminlayout.html.twig' %}
 {% block content %}
+    {% if success %}
+        <div class="alert alert-success" role="alert">User angelegt!</div>
+    {% endif %}
+    <div class="row">
 
-{{ form_start(userForm) }}
-    <div class="col-md-4"  >
-    {{ form_widget(userForm) }}
-</div>
-{{ form_end(userForm) }}
+        <div class="col-md-5 col-md-offset-2">
+            {{ form_start(userForm) }}
+
+            {{ form_widget(userForm) }}
+
+            {{ form_end(userForm) }}
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('social_gaming_backend') }}" >Zurück zur Übersicht</a>
+        </div>
+    </div>
 {% endblock %}
