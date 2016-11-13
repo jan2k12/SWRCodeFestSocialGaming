@@ -409,4 +409,18 @@ input{
     background-color: #292929;
 }
 
+.highscore-table-head{
+    font-size:1.5em;
+    background-color:#292929;
+}
+
+.overlay_text.highscore{
+    font-size: 1.5em;
+}
+
+.highscore-table{
+    font-size:1.5em;
+
+}
+
 

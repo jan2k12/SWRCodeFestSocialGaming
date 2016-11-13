@@ -1,9 +1,140 @@
 {% block content %}
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-        {%  for name,score in data %}
-            {{ name }} - {{ score }}
-        {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="row">
+                    <div class="overlay_text highscore col-md-12" style="text-align: left;">
+                        <div style="position:relative;">
+                            <h2 style="margin-top:7px;">Highscore</h2>
+                        </div>
+                    </div>
+                    <img class="center-block img-responsive" style="width:100%"
+                         src="{{ asset('public/img/banner_highscore.png') }}"/>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 highscore-table-head">
+                <div class="row">
+                    <div class="col-md-2 col-xs-2" style="text-align: center">
+                        <strong>Platz</strong>
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        <strong>Name</strong>
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        <strong>Punkte</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 highscore-table">
+                {% set index =1 %}
+                {% for name,score in data %}
+                    <div class="row">
+                        <div class="col-md-2 col-xs-2" style="text-align: center">
+                            {{ index }}
+                        </div>
+                        <div class="col-md-5 col-xs-5">
+                            {{ name }}
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            {{ score }}
+                        </div>
+                    </div>
+                    {% set index=index+1 %}
+                {% endfor %}
+                <div class="row">
+                    <div class="col-md-2 col-xs-2" style="text-align: center">
+                        2
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        Tanja
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        1500
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-xs-2" style="text-align: center">
+                        3
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        Claudia
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        100
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" style="background: #292929;line-height:4.8em">
+                <span>
+                    <h2 style="margin-bottom:0px;margin-top:0px;line-height: 2.0em">Deine Platzierung</h2>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 highscore-table-head">
+                <div class="row">
+                    <div class="col-md-2 col-xs-2" style="text-align: center">
+                        <strong>Platz</strong>
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        <strong>Name</strong>
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        <strong>Punkte</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 highscore-table">
+                {% set index =151 %}
+                <div class="row">
+                    <div class="col-md-2 col-xs-2" style="text-align: center">
+                        149
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        Daniel
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        10000
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-xs-2" style="text-align: center">
+                        149
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        Frithjox
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        9999
+                    </div>
+                </div>
+                {% for name,score in data %}
+                    <div class="row">
+                        <div class="col-md-2 col-xs-2" style="text-align: center">
+                            {{ index }}
+                        </div>
+                        <div class="col-md-5 col-xs-5">
+                            {{ name }}
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            {{ score }}
+                        </div>
+                    </div>
+                    {% set index=index+1 %}
+                {% endfor %}
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}

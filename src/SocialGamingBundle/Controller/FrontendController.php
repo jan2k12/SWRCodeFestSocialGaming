@@ -187,8 +187,7 @@ class FrontendController extends Controller
     {
         $impressumForm = $this->createFormBuilder();
 
-        return $this->render('SocialGamingBundle:Frontend:impressum.html.twig', array());
-
+        return $this->render('SocialGamingBundle:Frontend:impressum.html.twig',array());
     }
 
     public function info_1Action()
@@ -201,6 +200,10 @@ class FrontendController extends Controller
         return $this->render('SocialGamingBundle:Frontend:info_2.html.twig', array());
     }
 
+    public function registerAction()
+    {
+        return $this->render('SocialGamingBundle:Frontend:register.html.twig', array());
+    }
 
     public function highscoreAction()
     {
@@ -211,6 +214,7 @@ class FrontendController extends Controller
         foreach ($data as $entry) {
             $tplData[$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find($entry['id'])->getUsername()] = $entry['score'];
         }
+
         return $this->render('SocialGamingBundle:Frontend:highscore.html.twig', array('data' => $tplData));
     }
 
