@@ -77,6 +77,8 @@
             ev.preventDefault();
             var suspectId = $('input[type=radio]:checked', "#form_suspectId").val();
             app.navigateTo("frontend/afterVoting/" +suspectId);
+            $("#form").submit();
+
         });
 
         $('#form_Einreichen').attr('disabled','disabled').addClass('disabled').addClass('btn');

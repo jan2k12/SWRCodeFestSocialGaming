@@ -59,12 +59,12 @@
         </div>
             <div class="col-md-8 col-md-offset-2 normal-text-content">
             {% if loggedIn %}
-                <button>Zur Startseite</button>
+                <a href="#/frontend/startFront"><button style="font-size:1em" class="btn votebtn">Zur Startseite</button></a>
             {% else %}
                 <div>Registriere dich jetzt kostenlos</div>
                 <br/>
-                <button style="font-size:1em" class="btn votebtn">Registrieren</button><br/><br/>
-                <button style="font-size:1em" class="btn votebtn">Nein, Danke</button>
+                <a href="#/frontend/register"><button style="font-size:1em" class="btn votebtn">Registrieren</button></a><br/><br/>
+                <a href="#/frontend/startFront"><button style="font-size:1em" class="btn votebtn">Nein, Danke</button></a>
             {% endif %}
 
              </div>
@@ -78,6 +78,16 @@
             $("#time-left-timer").html(timeString);
         },1000);
 
+
+
+
+    </script>
+    <script>
+        const html = $("#content").html();
+        $("#content").html("");
+        setTimeout(function(){
+            $("#content").html(html);
+        }, 100);
     </script>
 {% endblock %}
 

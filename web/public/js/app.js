@@ -34,6 +34,7 @@ var app = {
 
         navigateTo: function (relativePath) {
                 $("#content").load(relativePath, function(){
+
                 });
 
         },
