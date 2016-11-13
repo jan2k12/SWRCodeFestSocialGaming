@@ -1,34 +1,41 @@
 {% block content %}
     <div class="episode-site">
     <div class="row headline-episode">
-        <div class="col-md-2 col-xs-2 col-md-offset-2">
-            <img style="max-width:50px;" src="{{ asset('public/gfx/fingerabdruck.png') }}" class="img-responsive thumb" alt="hier ist der Daumen">
-        </div>
-        <div class="col-md-8 col-xs-10">
+        <div class="col-md-12 col-xs-12">
             {{ show.name }} - {{ episode.name }}
         </div>
     </div>
     <br/>
     <div class="row">
-        <div class="col-md-10 col-md-offset-2">
-            <a href="#hints" class="accordion" data-toggle="collapse">
-                <span class="hint-text-head">Alle Hinweise <span class="glyphicon glyphicon-chevron-down"></span> </span>
+        <div class="col-md-8 col-md-offset-2 ">
+            <a href="#hints" class="accordion panel panel-default" data-toggle="collapse">
+                <span class="hint-text-head panel-heading col-md-8 col-md-offset-2 col-xs-12">
+                   <img style="max-width:25px;display:inline-block;" src="{{ asset('public/gfx/fingerabdruck.png') }}" class="img-responsive thumb" alt="hier ist der Daumen"> Alle Hinweise
+                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                </span>
             </a>
         </div>
     </div>
     <br/>
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div id="hints" style="font-size: 1.5em" class="hints collapse">
-            <ol>
-        {%  for hint in hints %}
-        <li>{{ hint.text }}</li>
-        {% endfor %}
-            </ol>
-        </div>
+            <div id="hints" style="font-size: 1.5em" class="hints collapse ">
+                <ol>
+                    <div class="panel-body col-md-8 col-md-offset-2 col-xs-12 ">
+                    {%  for hint in hints %}
+                        <li>
+                            {{ hint.text }} | <span style="color:#c3c3c3">{{ hint.date|date('Y-m-d H:m') }}</span>
+                        </li>
+                    {% endfor %}
+                    </div>
+                </ol>
+            </div>
         </div>
     </div>
+
     <br/>
+
     <div class="row">
     <div class="col-md-8 col-md-offset-2">
     {%  for suspect in suspects %}
@@ -46,7 +53,7 @@
 
     </div>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
             {{ form_start(suspectForm, {'attr': {'id': 'form_user_tip'}}) }}
             {{ form_widget(suspectForm) }}
         </div>
@@ -54,10 +61,46 @@
         <br />
             {{ form_end(suspectForm) }}
     </div>
+    {% if (alreadyVoted==true)%}
+    <div class="row">
+
+        <div class="col-md-8 col-md-offset-2">
+            <strong>So stimmten andere</strong>
+            <br/>
+            <div class="bar-100">
+                <div class="bar-65">
+                    Annika Blendel 65%
+                </div>
+            </div>
+            <br/>
+            <div class="bar-100">
+                <div class="bar-15">
+                    Henrik Paulsen 15%
+                </div>
+            </div>
+            <br/>
+            <div class="bar-100">
+                <div class="bar-75">
+                    killian hagendorf 75%
+                </div>
+            </div>
+            <br/>
+            <div class="bar-100">
+                <div class="bar-50">
+                    Lars Overbeck 75%
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
+    {% endif %}
+</div>
+
 {% endblock %}
+
 <script>
+    {% if (alreadyVoted==true)%}
+        $('#form_save').attr('disabled','disabled').addClass('disabled').addClass('btn').before('<span class="col-xs-12 col-md-12" style="text-align: center;font-size:2.2em;"> <strong>Sie haben schon abgestimmt</strong></span>');
+    {%  endif %}
     $(document).ready(function(){
         $('#form_save').attr('disabled','disabled').addClass('disabled').addClass('btn');
 
@@ -84,10 +127,10 @@
                 type:'POST',
                 data: $(this).serialize()
             }).done(function(data){
-
+                window.location.reload()
             })
 
-        })
+        });
 
         $('#form_suspectId > label').after('<br/>');
         $('#form_save').addClass('votebtn');

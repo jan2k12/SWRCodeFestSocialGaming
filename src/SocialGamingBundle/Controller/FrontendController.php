@@ -23,32 +23,45 @@ use \PDO;
 
 class FrontendController extends Controller
 {
-    public function indexAction(){
-        $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
-        return $this->render('SocialGamingBundle:Frontend:index.html.twig',array('shows'=>$actuatlTvShows));
-    }
-    public  function infoAction(){
-       return $this->render('SocialGamingBundle:Frontend:info.html.twig');
+    public function indexAction()
+    {
+        $actuatlTvShows = $this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
+        return $this->render('SocialGamingBundle:Frontend:index.html.twig', array('shows' => $actuatlTvShows));
     }
 
-    public function startFrontAction(){
-        $actuatlTvShows=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
-        return $this->render('SocialGamingBundle:Frontend:startFront.html.twig',array('shows'=>$actuatlTvShows));
-    }
-    public function episodesViewAction($showId){
-        $episodes=$this->getDoctrine()->getEntityManager()->createQuery('SELECT e from SocialGamingBundle:Episode as e where e.show=:showid')->setParameter('showid',$showId)->getResult();
-        return $this->render('SocialGamingBundle:Frontend:episodes.html.twig',array('episodes'=>$episodes));
+    public function infoAction()
+    {
+        return $this->render('SocialGamingBundle:Frontend:info.html.twig');
     }
 
-    public function episodeViewAction($episodeId,Request $request){
-        $episode=$this->getDoctrine()->getRepository('SocialGamingBundle:Episode')->find($episodeId);
-        $show=$this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->find($episode->getShow()->getId());
-        $allHints=$this->getDoctrine()->getEntityManager()->createQuery('SELECT h from SocialGamingBundle:Hint as h where h.episode=:episode')->setParameter('episode',$episodeId)->getResult();
-        $suspects=$this->getDoctrine()->getEntityManager()->createQuery('SELECT s from SocialGamingBundle:Suspect as s where s.episode=:episode')->setParameter('episode',$episodeId)->getResult();
-        $user=$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find(1);
-        $userTipp=new Usertipp();
+    public function startFrontAction()
+    {
+        $actuatlTvShows = $this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->findAll();
+        return $this->render('SocialGamingBundle:Frontend:startFront.html.twig', array('shows' => $actuatlTvShows));
+    }
+
+    public function episodesViewAction($showId)
+    {
+        $episodes = $this->getDoctrine()->getEntityManager()->createQuery('SELECT e from SocialGamingBundle:Episode as e where e.show=:showid')->setParameter('showid', $showId)->getResult();
+        return $this->render('SocialGamingBundle:Frontend:episodes.html.twig', array('episodes' => $episodes));
+    }
+
+    public function episodeViewAction($episodeId, Request $request)
+    {
+        $episode = $this->getDoctrine()->getRepository('SocialGamingBundle:Episode')->find($episodeId);
+        $show = $this->getDoctrine()->getRepository('SocialGamingBundle:Tvshow')->find($episode->getShow()->getId());
+        $allHints = $this->getDoctrine()->getEntityManager()->createQuery('SELECT h from SocialGamingBundle:Hint as h where h.episode=:episode')->setParameter('episode', $episodeId)->getResult();
+        $suspects = $this->getDoctrine()->getEntityManager()->createQuery('SELECT s from SocialGamingBundle:Suspect as s where s.episode=:episode')->setParameter('episode', $episodeId)->getResult();
+        $user = $this->getDoctrine()->getRepository('SocialGamingBundle:User')->find(1);
+        $userTipps = $this->getDoctrine()->getRepository('SocialGamingBundle:Usertipp')->findBy(array('userid' => $user->getId()));
+        $userAlreadyVoted = true;
+        if (count($userTipps) == 0) {
+            $userAlreadyVoted = false;
+        }
+        $userTipp = new Usertipp();
         $userTipp->setUserid($user->getId());
         $userTipp->setDate(new \DateTime());
+
 
         $hints = array();
         foreach ($allHints as $hint) {
@@ -57,19 +70,19 @@ class FrontendController extends Controller
             }
         }
 
-        $suspectForm=$this->createFormBuilder($userTipp)->add('suspectId',EntityType::class,array(
-            'class'=>'SocialGamingBundle:Suspect',
-            'choices'=>$suspects,
-            'expanded'=>true,
-            'multiple'=>false,
-            'by_reference'=>false
+        $suspectForm = $this->createFormBuilder($userTipp)->add('suspectId', EntityType::class, array(
+            'class' => 'SocialGamingBundle:Suspect',
+            'choices' => $suspects,
+            'expanded' => true,
+            'multiple' => false,
+            'by_reference' => false
         ))
-            ->add('save',SubmitType::class)->getForm();
+            ->add('save', SubmitType::class)->getForm();
 
-        $form=$suspectForm->handleRequest($request);
+        $form = $suspectForm->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $errors=array();
+            $errors = array();
             $userTipp = $form->getData();
 
             $userScore = new UserScore();
@@ -80,103 +93,113 @@ class FrontendController extends Controller
             if ($userTipp->getSuspectid()->getGuilty()) {
                 $duration = $episode->getEnddate()->getTimestamp()
                     - $episode->getStartdate()->getTimestamp();
+                if ($duration <= 0) {
+                    throw new \Exception('wrong Time');
+                }
                 $guesstime = $userTipp->getDate()->getTimestamp()
                     - $episode->getStartdate()->getTimestamp();
                 $timeratio = $guesstime / $duration;
                 if ($timeratio < 0) {
                     throw new \Exception('Event not started');
                 } else {
-                    $userScore->setScore(100*(10-$numHits-5*$timeratio));
+                    $userScore->setScore(100 * (10 - $numHits - 5 * $timeratio));
                 }
             } else {
                 $userScore->setScore(0);
             }
 
             $userTipp->setSuspectId($userTipp->getSuspectId()->getId());
-            try{
+            try {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($userTipp);
                 $em->persist($userScore);
                 $em->flush();
-            } catch(\Exception $ex) {
+            } catch (\Exception $ex) {
                 $errors[] = $ex->getMessage();
             }
 
-            return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig',array('user'=>$user,'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig', array('user' => $user, 'errors' => $errors));
         }
-         return $this->render('SocialGamingBundle:Frontend:episode.html.twig',array('suspectForm'=>$suspectForm->createView(),'hints'=>$hints,'show'=>$show,'episode'=>$episode,'suspects'=>$suspects));
+        return $this->render('SocialGamingBundle:Frontend:episode.html.twig', array('suspectForm' => $suspectForm->createView(), 'hints' => $hints, 'show' => $show, 'episode' => $episode, 'suspects' => $suspects, 'alreadyVoted' => $userAlreadyVoted));
     }
 
-    public function suspectFrontAction(Request $request){
+    public function suspectFrontAction(Request $request)
+    {
         $suspect = new Suspect();
-        $suspectFrontForm=$this->createFormBuilder($suspect)
-            ->add('imagePath',TextType::class)
-            ->add('name',TextType::class)
+        $suspectFrontForm = $this->createFormBuilder($suspect)
+            ->add('imagePath', TextType::class)
+            ->add('name', TextType::class)
             ->getForm();
-        $form=$suspectFrontForm->handleRequest($request);
+        $form = $suspectFrontForm->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $errors=array();
+            $errors = array();
             $episode = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($episode);
             $em->flush();
 
-            return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig',array('suspectForm'=>$suspectFrontForm->createView(),'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig', array('suspectForm' => $suspectFrontForm->createView(), 'errors' => $errors));
         }
-        return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig',array('suspectFrontForm'=>$suspectFrontForm->createView()));
+        return $this->render('SocialGamingBundle:Frontend:suspectFront.html.twig', array('suspectFrontForm' => $suspectFrontForm->createView()));
 
 
     }
-    public function resultAction(Request $request){
 
-        $resultForm=$this->createFormBuilder()
-            ->add('imagePath',TextType::class)
-            ->add('name',TextType::class)
-            ->add('',TextType::class)
+    public function resultAction(Request $request)
+    {
+
+        $resultForm = $this->createFormBuilder()
+            ->add('imagePath', TextType::class)
+            ->add('name', TextType::class)
+            ->add('', TextType::class)
             ->getForm();
 
 
-        $form=$resultForm->handleRequest($request);
+        $form = $resultForm->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $errors=array();
+            $errors = array();
             $result = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($result);
             $em->flush();
 
-            return $this->render('SocialGamingBundle:Frontend:result.html.twig',array('resultForm'=>$resultForm->createView(),'errors'=>$errors));
+            return $this->render('SocialGamingBundle:Frontend:result.html.twig', array('resultForm' => $resultForm->createView(), 'errors' => $errors));
         }
-        return $this->render('SocialGamingBundle:Frontend:result.html.twig',array('resultForm'=>$resultForm->createView()));
+        return $this->render('SocialGamingBundle:Frontend:result.html.twig', array('resultForm' => $resultForm->createView()));
 
     }
 
     public function impressumAction()
     {
-        $impressumForm=$this->createFormBuilder();
+        $impressumForm = $this->createFormBuilder();
 
-        return $this->render('SocialGamingBundle:Frontend:impressum.html.twig',array());
+        return $this->render('SocialGamingBundle:Frontend:impressum.html.twig', array());
 
     }
-    public function info_1Action(){
-        return $this->render('SocialGamingBundle:Frontend:info_1.html.twig',array());
+
+    public function info_1Action()
+    {
+        return $this->render('SocialGamingBundle:Frontend:info_1.html.twig', array());
     }
+
     public function info_2Action()
     {
         return $this->render('SocialGamingBundle:Frontend:info_2.html.twig', array());
     }
-    public function highscoreAction(){
-                $sql="SELECT SUM(score) as score, userId as id from user_score GROUP BY userid";
-                $stmt = $this->getDoctrine()->getEntityManager()->getConnection()->prepare($sql);
-                $stmt->execute();
-                $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
-                foreach($data as $entry ){
-                    $tplData[$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find($entry['id'])->getUsername()]=$entry['score'];
-                }
-            return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array('data'=>$tplData));
 
+    public function highscoreAction()
+    {
+        $sql = "SELECT SUM(score) as score, userId as id from user_score GROUP BY userid";
+        $stmt = $this->getDoctrine()->getEntityManager()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($data as $entry) {
+            $tplData[$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find($entry['id'])->getUsername()] = $entry['score'];
+        }
+        return $this->render('SocialGamingBundle:Frontend:highscore.html.twig', array('data' => $tplData));
     }
 }
