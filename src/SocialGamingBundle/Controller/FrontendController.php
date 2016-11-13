@@ -168,6 +168,7 @@ class FrontendController extends Controller
     {
         return $this->render('SocialGamingBundle:Frontend:info_2.html.twig', array());
     }
+
     public function highscoreAction(){
                 $sql="SELECT SUM(score) as score, userId as id from user_score GROUP BY userid";
                 $stmt = $this->getDoctrine()->getEntityManager()->getConnection()->prepare($sql);
