@@ -204,6 +204,7 @@ class FrontendController extends Controller
         foreach ($data as $entry) {
             $tplData[$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find($entry['id'])->getUsername()] = $entry['score'];
         }
+
         return $this->render('SocialGamingBundle:Frontend:highscore.html.twig', array('data' => $tplData));
     }
 
