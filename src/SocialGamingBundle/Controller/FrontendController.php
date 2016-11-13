@@ -160,9 +160,14 @@ class FrontendController extends Controller
 
         return $this->render('SocialGamingBundle:Frontend:impressum.html.twig',array());
 
-
     }
-
+    public function info_1Action(){
+        return $this->render('SocialGamingBundle:Frontend:info_1.html.twig',array());
+    }
+    public function info_2Action()
+    {
+        return $this->render('SocialGamingBundle:Frontend:info_2.html.twig', array());
+    }
     public function highscoreAction(){
                 $sql="SELECT SUM(score) as score, userId as id from user_score GROUP BY userid";
                 $stmt = $this->getDoctrine()->getEntityManager()->getConnection()->prepare($sql);
@@ -172,5 +177,6 @@ class FrontendController extends Controller
                     $tplData[$this->getDoctrine()->getRepository('SocialGamingBundle:User')->find($entry['id'])->getUsername()]=$entry['score'];
                 }
             return $this->render('SocialGamingBundle:Frontend:highscore.html.twig',array('data'=>$tplData));
+
     }
 }
