@@ -78,41 +78,39 @@ public class MainActivity extends AppCompatActivity {
         pullTimer = new Timer();
         pullTimer.schedule(new TimerTask() {
             private void checkNotifications() {
-                try {
-                    InputStream inputStream = (new URL("http://" + server + "/android/getHints")).openStream();
-                    Scanner s = new Scanner(inputStream).useDelimiter("\\A");
-                    String string = s.hasNext() ? s.next() : "";
-                    JSONArray notificationArray = new JSONArray(string);
-                    for (int i = 0; i < notificationArray.length(); i++) {
-                        JSONObject n = notificationArray.getJSONObject(i);
-                        String hint = n.getString("hint");
-                        String show = n.getString("show");
-                        int id = n.getInt("id");
-                        if (!MainActivity.this.receivedNotifications.contains(id)) {
-                            MainActivity.this.sendNotification(id, show, hint);
-                            MainActivity.this.receivedNotifications.add(id);
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                MainActivity.this.checkNotifications(MainActivity.currentIndex++);
             }
 
             @Override
             public void run() {
                 checkNotifications();
             }
-        }, 0, 1000);
+        }, 0, 10 * 60 * 1000);
+        
+    }
+    private static int currentIndex = 0;
 
-        Timer stopTimer = new Timer();
-        stopTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                //MainActivity.this.sendNotification(0, "Stopped", "");
-                MainActivity.this.pullTimer.cancel();
+    private void checkNotifications(int i) {
+        try {
+            InputStream inputStream = (new URL("http://" + server + "/android/getHints")).openStream();
+            Scanner s = new Scanner(inputStream).useDelimiter("\\A");
+            String string = s.hasNext() ? s.next() : "";
+            JSONArray notificationArray = new JSONArray(string);
+            if(notificationArray.length() >= i){
+                JSONObject n = notificationArray.getJSONObject(i);
+                String hint = n.getString("hint");
+                String show = n.getString("show");
+                int id = n.getInt("id");
+                if (!MainActivity.this.receivedNotifications.contains(id)) {
+                    MainActivity.this.sendNotification(id, show, hint);
+                    MainActivity.this.receivedNotifications.add(id);
+                }
+            }else{
+                this.pullTimer.cancel();
             }
-        }, 3600000);
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -20,16 +20,16 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div id="hints" style="font-size: 1.5em" class="hints collapse ">
-                <ol>
+            <div id="hints" style="font-size: 1em" class="hints collapse ">
+                <ul style="list-style:none; margin:0;padding:0">
                     <div class="panel-body col-md-8 col-md-offset-2 col-xs-12 ">
                     {%  for hint in hints %}
-                        <li>
-                            {{ hint.text }} | <span style="color:#c3c3c3">{{ hint.date|date('Y-m-d H:m') }}</span>
+                        <li style="margin:10px">
+                           {{ hint.text }}  <span style="color:#c3c3c3"></span>
                         </li>
                     {% endfor %}
                     </div>
-                </ol>
+                </ul>
             </div>
         </div>
     </div>
@@ -42,8 +42,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 suspect-img-cnt">
                 <span data-value="{{ suspect.id }}" class="clickable-suspect">
-                    <div class="suspect-overlay_text" style="font-size: 1.5em">{{ suspect.name }}</div>
+                    <div>
                     <img src="{{ asset('public/img/'~ suspect.imagepath) }}" class="img-responsive " />
+                    <div class="suspect-overlay_text" style="font-size: 1.5em">{{ suspect.name }}</div></div>
                 </span>
             </div>
         </div>
@@ -52,7 +53,7 @@
     {% endfor %}
 
     </div>
-    <div class="row">
+    <div class="row" >
         <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
             {{ form_start(suspectForm, {'attr': {'id': 'form_user_tip'}}) }}
             {{ form_widget(suspectForm) }}
@@ -61,48 +62,24 @@
         <br />
             {{ form_end(suspectForm) }}
     </div>
-    {% if (alreadyVoted==true)%}
-    <div class="row">
 
-        <div class="col-md-8 col-md-offset-2">
-            <strong>So stimmten andere</strong>
-            <br/>
-            <div class="bar-100">
-                <div class="bar-65">
-                    Annika Blendel 65%
-                </div>
-            </div>
-            <br/>
-            <div class="bar-100">
-                <div class="bar-15">
-                    Henrik Paulsen 15%
-                </div>
-            </div>
-            <br/>
-            <div class="bar-100">
-                <div class="bar-75">
-                    killian hagendorf 75%
-                </div>
-            </div>
-            <br/>
-            <div class="bar-100">
-                <div class="bar-50">
-                    Lars Overbeck 75%
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
 </div>
 
 {% endblock %}
 
 <script>
     {% if (alreadyVoted==true)%}
-        $('#form_save').attr('disabled','disabled').addClass('disabled').addClass('btn').before('<span class="col-xs-12 col-md-12" style="text-align: center;font-size:2.2em;"> <strong>Sie haben schon abgestimmt</strong></span>');
+        $('#form_Einreichen').attr('disabled','disabled').addClass('disabled').addClass('btn').before('<span class="col-xs-12 col-md-12" style="text-align: center;font-size:2.2em;"> <strong>Sie haben schon abgestimmt</strong></span>');
     {%  endif %}
     $(document).ready(function(){
-        $('#form_save').attr('disabled','disabled').addClass('disabled').addClass('btn');
+
+        $('#form_Einreichen').click(function (ev) {
+            ev.preventDefault();
+            var suspectId = $('input[type=radio]:checked', "#form_suspectId").val();
+            app.navigateTo("frontend/afterVoting/" +suspectId);
+        });
+
+        $('#form_Einreichen').attr('disabled','disabled').addClass('disabled').addClass('btn');
 
         $('a.accordion').click(function(){
             console.log($('#hints').attr('aria-expanded'))
@@ -133,15 +110,15 @@
         });
 
         $('#form_suspectId > label').after('<br/>');
-        $('#form_save').addClass('votebtn');
-        $('#form').find('label').css('visibility','hidden');
+        $('#form_Einreichen').addClass('votebtn');
+        $('#form > div:first-child').css('display','none');
         $('.clickable-suspect').click(function(){
             $('.clickable-suspect').each(function(){
-               $(this).removeClass('redborder');
+               $(this).removeClass('selectedSuspect');
             });
             var val=$(this).data('value');
-            $(this).addClass('redborder');
-            $('#form_save').removeAttr('disabled').removeClass('disabled');
+            $(this).addClass('selectedSuspect');
+            $('#form_Einreichen').removeAttr('disabled').removeClass('disabled');
             $('#form_suspectId_'+val).prop('checked',true);
         })
 

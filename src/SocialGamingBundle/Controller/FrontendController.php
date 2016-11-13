@@ -77,7 +77,7 @@ class FrontendController extends Controller
             'multiple' => false,
             'by_reference' => false
         ))
-            ->add('save', SubmitType::class)->getForm();
+            ->add('Einreichen', SubmitType::class)->getForm();
 
         $form = $suspectForm->handleRequest($request);
 
@@ -121,6 +121,16 @@ class FrontendController extends Controller
             return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig', array('user' => $user, 'errors' => $errors));
         }
         return $this->render('SocialGamingBundle:Frontend:episode.html.twig', array('suspectForm' => $suspectForm->createView(), 'hints' => $hints, 'show' => $show, 'episode' => $episode, 'suspects' => $suspects, 'alreadyVoted' => $userAlreadyVoted));
+    }
+
+    public function afterVotingAction ($suspectId){
+
+        $supsepct = $episode = $this->getDoctrine()->getRepository('SocialGamingBundle:Suspect')->find($suspectId);
+
+        return $this->render('SocialGamingBundle:Frontend:afterVoting.html.twig', array(
+            'suspect' => $supsepct,
+            'loggedIn' => $_SESSION["loggedIn"],
+        ));
     }
 
     public function suspectFrontAction(Request $request)

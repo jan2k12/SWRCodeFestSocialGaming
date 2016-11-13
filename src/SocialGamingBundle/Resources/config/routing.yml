@@ -44,6 +44,9 @@ social_gaming_frontend_episodes:
 social_gaming_frontend_episode:
         path: /episode/view/{episodeId}
         defaults: { _controller: SocialGamingBundle:Frontend:episodeView }
+social_gaming_frontend_afterVoting:
+        path: /frontend/afterVoting/{suspectId}
+        defaults: { _controller: SocialGamingBundle:Frontend:afterVoting }
 social_gaming_frontend_highscore:
         path: /frontend/highscore
         defaults: { _controller: SocialGamingBundle:Frontend:highscore }

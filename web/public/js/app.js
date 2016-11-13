@@ -28,12 +28,14 @@ var app = {
             //$("#app-menu").css({"top": appTitleBarBottom });
 
 
-            const docSize = {width: $(document).width() -15, height: $(document).height()- appTitleBarBottom};
+            const docSize = {width: $('body').innerWidth(), height: $('body').innerHeight()- appTitleBarBottom};
             $("#app-menu-cover-area").css({"width": docSize.width, "height": docSize.height,"top": appTitleBarBottom });
         },
 
         navigateTo: function (relativePath) {
-                $("#content").load(relativePath);
+                $("#content").load(relativePath, function(){
+                });
+
         },
 
         toggleMenu: function (show) {
@@ -74,6 +76,10 @@ var app = {
                 $(".app-menu-user").show("slide");
                 $(".app-menu-title-bar",".app-menu-user").html(username.toString().toUpperCase());
             }
+        },
+
+        scrollToTop: function(){
+
         }
     };
 

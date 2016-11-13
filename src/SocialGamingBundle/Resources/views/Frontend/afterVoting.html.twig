@@ -1,3 +1,83 @@
 {% block content %}
-{{ dump() }}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 suspect-img-cnt">
+                <img src="{{ asset('public/img/'~ suspect.imagepath) }}" class="img-responsive " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 normal-text-content">
+                Verdächtige <b>{{ suspect.name }}</b> wurde erfolgreich als Tipp eingereicht.
+            </div>
+            <div class="col-md-8 col-md-offset-2 highlighted-content">
+                Mögliche Punkte: 250
+            </div>
+            <div class="col-md-8 col-md-offset-2 normal-text-content">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img class="img-responsive" src="{{ asset('public/gfx/mystery_murderer.png') }}">
+                    </div>
+                    <div class="col-xs-9">
+                        <p>149 Spieler haben bereits einen Tipp abgegeben.</p>
+                    </div>
+                 </div>
+            </div>
+            <div class="col-md-8 col-md-offset-2 highlighted-content">
+                Tatverdächtige
+            </div>
+            <div class="col-md-8 col-md-offset-2 normal-text-content">
+                <div class="bar-100">
+                    Annika Blendel
+                    <div class="bar-57">
+                        57%
+                    </div>
+                </div>
+                <br/>
+                <div class="bar-100">
+                    Henrik Paulsen
+                    <div class="bar-25">
+                        25%
+                    </div>
+                </div>
+                <br/>
+                <div class="bar-100">
+                    Killian Hagendorf
+                    <div class="bar-14">
+                        14%
+                    </div>
+                </div>
+                <br/>
+                <div class="bar-100">
+                    Lars Overbeck
+                    <div class="bar-12">
+                        12%
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-8 col-md-offset-2 highlighted-content" style="text-align:center;">
+            <div id="time-left-timer">53 Min. 22 Sek.</div>
+            <div style="font-size: 0.7em; font-family: 'Open Sans'">bis zur Auflösung</div>
+        </div>
+            <div class="col-md-8 col-md-offset-2 normal-text-content">
+            {% if loggedIn %}
+                <button>Zur Startseite</button>
+            {% else %}
+                <div>Registriere dich jetzt kostenlos</div>
+                <br/>
+                <button style="font-size:1em" class="btn votebtn">Registrieren</button><br/><br/>
+                <button style="font-size:1em" class="btn votebtn">Nein, Danke</button>
+            {% endif %}
+
+             </div>
+
+        </div>
+    <script>
+        var now = 53 * 60 + 22;
+        var counterInterval = setInterval(function(){
+            var nextTimeStep = --now;
+            var timeString = Math.floor(now / 60) + " Min. " + Math.floor(now % 60) + " Sek.";
+            $("#time-left-timer").html(timeString);
+        },1000);
+
+    </script>
 {% endblock %}
+
