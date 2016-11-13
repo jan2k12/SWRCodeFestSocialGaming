@@ -16,7 +16,7 @@
 
 #app-menu{
     position:absolute;
-    top:65px;
+    top:63px;
     left:0;
     display:none;
     z-index:1000;
@@ -86,8 +86,11 @@ a:hover {
 }
 
 .app-menu-divider{
-    width:1px;
-    height:1em;
+    width:80%;
+    height:3px;
+    margin:20px;
+    background-color:#292929;
+    border: none;
 }
 
     body, html {
@@ -208,11 +211,6 @@ h2, h3 {
 
 #app-menu a:hover {
     color: #f22626;
-}
-
-.app-menu-divider{
-    width:1px;
-    height:1em;
 }
 
 body, html {
