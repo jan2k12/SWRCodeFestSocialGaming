@@ -74,7 +74,7 @@
     {% endif %}
     $(document).ready(function(){
     {% if alreadyVoted %}
-        $('#form_Einreichen').attr('disabled','disabled').addClass('disabled').addClass('btn').before('<span class="col-xs-12 col-md-12" style="text-align: center;font-size:2.2em;"> <strong>Sie haben schon abgestimmt</strong></span>');
+        $('#form_Einreichen').attr('disabled','disabled').addClass('disabled').addClass('btn').before('<span class="col-xs-12 col-md-12" style="text-align: center;font-size:2.2em;"> <strong>Sie haben bereits abgestimmt</strong></span><br/><br/>');
     {%  endif %}
 
 
