@@ -32,20 +32,17 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 highscore-table">
                 {% set index =1 %}
-                {% for name,score in data %}
-                    <div class="row">
-                        <div class="col-md-2 col-xs-2" style="text-align: center">
-                            {{ index }}
-                        </div>
-                        <div class="col-md-5 col-xs-5">
-                            {{ name }}
-                        </div>
-                        <div class="col-md-4 col-xs-4">
-                            {{ score }}
-                        </div>
+                 <div class="row">
+                    <div class="col-md-2 col-xs-2" style="text-align: center">
+                        1
                     </div>
-                    {% set index=index+1 %}
-                {% endfor %}
+                    <div class="col-md-5 col-xs-5">
+                        Daniel
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        6320
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-2 col-xs-2" style="text-align: center">
                         2
@@ -54,7 +51,7 @@
                         Tanja
                     </div>
                     <div class="col-md-4 col-xs-4">
-                        1500
+                        5780
                     </div>
                 </div>
                 <div class="row">
@@ -65,7 +62,7 @@
                         Claudia
                     </div>
                     <div class="col-md-4 col-xs-4">
-                        100
+                        5365
                     </div>
                 </div>
             </div>
@@ -99,24 +96,38 @@
                 {% set index =151 %}
                 <div class="row">
                     <div class="col-md-2 col-xs-2" style="text-align: center">
-                        149
+                        147
                     </div>
                     <div class="col-md-5 col-xs-5">
                         Daniel
                     </div>
                     <div class="col-md-4 col-xs-4">
-                        10000
+                        550
                     </div>
                 </div>
+                {% for name,score in data %}
+                    <div class="row">
+                        <div class="col-md-2 col-xs-2" style="text-align: center">
+                            148
+                        </div>
+                        <div class="col-md-5 col-xs-5">
+                            {{ name }}
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            {{ score }}
+                        </div>
+                    </div>
+                    {% set index=index+1 %}
+                {% endfor %}
                 <div class="row">
                     <div class="col-md-2 col-xs-2" style="text-align: center">
                         149
                     </div>
                     <div class="col-md-5 col-xs-5">
-                        Frithjox
+                        Frithjof
                     </div>
                     <div class="col-md-4 col-xs-4">
-                        9999
+                        190
                     </div>
                 </div>
             </div>
