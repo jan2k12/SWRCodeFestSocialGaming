@@ -31,4 +31,14 @@ SocialGamingBundle\Entity\User:
             type: boolean
             nullable: true
             column: isActive
+        password:
+            type: string
+            nullable: false
+            length: 64
+    oneToOne:
+        role:
+            targetEntity: Role
+            joinColumn:
+                name: roleId
+                referencedColumnName: id
     lifecycleCallbacks: {  }
