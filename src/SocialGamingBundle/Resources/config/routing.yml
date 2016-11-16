@@ -1,3 +1,10 @@
+social_gaming_login:
+        path: /login
+        defaults: { _controller: SocialGamingBundle:Security:login }
+social_gaming_register:
+        path: /frontend/register
+        defaults: { _controller: SocialGamingBundle:Registration:register }
+
 social_gaming_backend:
         path: /admin
         defaults: { _controller: SocialGamingBundle:Admin:index }
