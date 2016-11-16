@@ -1,0 +1,54 @@
+{% block content %}
+    {{ form_start(form,{'attr':{'id': 'registrationform' }}) }}
+    <div class="container" style="margin-top:2em;">
+        {%  if error is defined  %}
+            <div class="row">
+                <div class="alert alert-error" role="alert">{{ error }}</div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_label(form.username ,'Username', {'label_attr': {'class': 'col-form-label'}} )}}
+                {{ form_errors(form.username) }}
+                {{ form_widget(form.username,{'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'col-form-label'}} ) }}
+                {{ form_errors(form.email) }}
+                {{ form_widget(form.email,{'attr': {'class': 'form-control'}})}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_label(form.plainPassword.first, 'Password', {'label_attr': {'class': 'col-form-label'}} ) }}
+                {{ form_errors(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.plainPassword.second, 'Password_repeat', {'label_attr': {'class': 'col-form-label'}} ) }}
+                {{ form_errors(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second,{'attr': {'class': 'form-control'}})}}
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="submit" class="form-control btn btn-default">Register!</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<script>
+    $('#registrationform').submit(function(event){
+        event.preventDefault();
+        $.ajax({
+            url: '/frontend/register',
+            type:'POST',
+            data: $(this).serialize()
+        }).done(function(data){
+
+        })
+
+    });
+</script>

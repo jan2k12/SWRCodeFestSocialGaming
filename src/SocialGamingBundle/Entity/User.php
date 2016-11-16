@@ -1,11 +1,13 @@
 <?php
 
 namespace SocialGamingBundle\Entity;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+
 
 /**
  * User
  */
-class User
+class User implements AdvancedUserInterface , \Serializable
 {
     /**
      * @var integer
@@ -28,28 +30,21 @@ class User
     private $isactive;
 
     /**
-     * @var integer
+     * @var \SocialGamingBundle\Entity\Role
      */
-    private $userSuspectId;
+    private $role;
+
+    private $plainPassword;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * User constructor.
+     * @param bool $isactive
      */
-    private $suspect;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $episode;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
+    public function __construct($isactive=null)
     {
-        $this->suspect = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->episode = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isactive = $isactive;
     }
+
 
     /**
      * Get id
@@ -134,94 +129,202 @@ class User
     }
 
     /**
-     * Set userSuspectId
+     * Set role
      *
-     * @param integer $userSuspectId
+     * @param \SocialGamingBundle\Entity\Role $role
      *
      * @return User
      */
-    public function setUserSuspectId($userSuspectId)
+    public function setRole(\SocialGamingBundle\Entity\Role $role = null)
     {
-        $this->userSuspectId = $userSuspectId;
+        $this->role = $role;
 
         return $this;
     }
 
     /**
-     * Get userSuspectId
+     * Get role
      *
-     * @return integer
+     * @return \SocialGamingBundle\Entity\Role
      */
-    public function getUserSuspectId()
+    public function getRole()
     {
-        return $this->userSuspectId;
+        return $this->role;
+    }
+
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**
-     * Add suspect
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize(array($this->id, $this->username, $this->email,$this->isactive));
+    }
+
+    /**
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id, $this->username, $this->email,$this->isactive
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * Returns the roles granted to the user.
      *
-     * @param \SocialGamingBundle\Entity\Suspect $suspect
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    /**
+     * Returns the password used to authenticate the user.
+     *
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return string The password
+     */
+    public function getPassword()
+    {
+        // TODO: Implement getPassword() method.
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * Checks whether the user's account has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw an AccountExpiredException and prevent login.
+     *
+     * @return bool true if the user's account is non expired, false otherwise
+     *
+     * @see AccountExpiredException
+     */
+    public function isAccountNonExpired()
+    {
+        // TODO: Implement isAccountNonExpired() method.
+    }
+
+    /**
+     * Checks whether the user is locked.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a LockedException and prevent login.
+     *
+     * @return bool true if the user is not locked, false otherwise
+     *
+     * @see LockedException
+     */
+    public function isAccountNonLocked()
+    {
+        // TODO: Implement isAccountNonLocked() method.
+    }
+
+    /**
+     * Checks whether the user's credentials (password) has expired.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a CredentialsExpiredException and prevent login.
+     *
+     * @return bool true if the user's credentials are non expired, false otherwise
+     *
+     * @see CredentialsExpiredException
+     */
+    public function isCredentialsNonExpired()
+    {
+        // TODO: Implement isCredentialsNonExpired() method.
+    }
+
+    /**
+     * Checks whether the user is enabled.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a DisabledException and prevent login.
+     *
+     * @return bool true if the user is enabled, false otherwise
+     *
+     * @see DisabledException
+     */
+    public function isEnabled()
+    {
+        // TODO: Implement isEnabled() method.
+    }
+    /**
+     * @var string
+     */
+    private $password;
+
+
+    /**
+     * Set password
+     *
+     * @param string $password
      *
      * @return User
      */
-    public function addSuspect(\SocialGamingBundle\Entity\Suspect $suspect)
+    public function setPassword($password)
     {
-        $this->suspect[] = $suspect;
+        $this->password = $password;
 
         return $this;
-    }
-
-    /**
-     * Remove suspect
-     *
-     * @param \SocialGamingBundle\Entity\Suspect $suspect
-     */
-    public function removeSuspect(\SocialGamingBundle\Entity\Suspect $suspect)
-    {
-        $this->suspect->removeElement($suspect);
-    }
-
-    /**
-     * Get suspect
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSuspect()
-    {
-        return $this->suspect;
-    }
-
-    /**
-     * Add episode
-     *
-     * @param \SocialGamingBundle\Entity\Episode $episode
-     *
-     * @return User
-     */
-    public function addEpisode(\SocialGamingBundle\Entity\Episode $episode)
-    {
-        $this->episode[] = $episode;
-
-        return $this;
-    }
-
-    /**
-     * Remove episode
-     *
-     * @param \SocialGamingBundle\Entity\Episode $episode
-     */
-    public function removeEpisode(\SocialGamingBundle\Entity\Episode $episode)
-    {
-        $this->episode->removeElement($episode);
-    }
-
-    /**
-     * Get episode
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getEpisode()
-    {
-        return $this->episode;
     }
 }
