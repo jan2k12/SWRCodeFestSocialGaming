@@ -1,1 +1,3 @@
-Welcom to the SWR Codefest
+Es wird weiter gebaut!
+
+Bitte Pull Requests benutzen
