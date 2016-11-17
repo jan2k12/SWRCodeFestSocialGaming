@@ -3,7 +3,7 @@ web/public/img/
 /bin/
 /build/
 !/composer.phar
-/vendor/
+!/vendor/
 /web/bundles/
 /var/
 var/cache/.gitkeep
