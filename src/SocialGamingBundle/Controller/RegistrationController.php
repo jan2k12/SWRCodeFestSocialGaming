@@ -8,9 +8,6 @@
 
 namespace SocialGamingBundle\Controller;
 
-
-use Monolog\Handler\LogEntriesHandler;
-use Monolog\Logger;
 use SocialGamingBundle\Entity\User;
 use SocialGamingBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
