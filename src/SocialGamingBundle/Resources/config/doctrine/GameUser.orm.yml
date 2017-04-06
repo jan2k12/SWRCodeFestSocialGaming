@@ -1,6 +1,7 @@
-SocialGamingBundle\Entity\User:
+SocialGamingBundle\Entity\GameUser:
     type: entity
-    table: user
+    repositoryClass: SocialGamingBundle\Repository\UserRepository
+    table: gameUser
     uniqueConstraints:
         email_UNIQUE:
             columns:
@@ -36,8 +37,9 @@ SocialGamingBundle\Entity\User:
             nullable: false
             length: 64
     oneToOne:
-        role:
+        roles:
             targetEntity: Role
+            inversedBy: gameUser
             joinColumn:
                 name: roleId
                 referencedColumnName: id

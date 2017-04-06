@@ -2,12 +2,14 @@
 
 namespace SocialGamingBundle\Entity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
  * User
  */
-class User implements AdvancedUserInterface , \Serializable
+class User implements AdvancedUserInterface , \Serializable, EquatableInterface
 {
     /**
      * @var integer
@@ -29,12 +31,9 @@ class User implements AdvancedUserInterface , \Serializable
      */
     private $isactive;
 
-    /**
-     * @var \SocialGamingBundle\Entity\Role
-     */
-    private $role;
 
     private $plainPassword;
+    private $roles;
 
     /**
      * User constructor.
@@ -128,30 +127,6 @@ class User implements AdvancedUserInterface , \Serializable
         return $this->isactive;
     }
 
-    /**
-     * Set role
-     *
-     * @param \SocialGamingBundle\Entity\Role $role
-     *
-     * @return User
-     */
-    public function setRole(\SocialGamingBundle\Entity\Role $role = null)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return \SocialGamingBundle\Entity\Role
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
 
     public function getPlainPassword()
     {
@@ -210,7 +185,21 @@ class User implements AdvancedUserInterface , \Serializable
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return array($this->roles);
+    }
+
+    /**
+     * Set role
+     *
+     * @param \SocialGamingBundle\Entity\Role $role
+     *
+     * @return User
+     */
+    public function setRoles(\SocialGamingBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
+
+        return $this;
     }
 
     /**
@@ -223,7 +212,7 @@ class User implements AdvancedUserInterface , \Serializable
      */
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+        return $this->password;
     }
 
     /**
@@ -261,7 +250,7 @@ class User implements AdvancedUserInterface , \Serializable
      */
     public function isAccountNonExpired()
     {
-        // TODO: Implement isAccountNonExpired() method.
+        return true;
     }
 
     /**
@@ -276,7 +265,7 @@ class User implements AdvancedUserInterface , \Serializable
      */
     public function isAccountNonLocked()
     {
-        // TODO: Implement isAccountNonLocked() method.
+        return true;
     }
 
     /**
@@ -291,7 +280,7 @@ class User implements AdvancedUserInterface , \Serializable
      */
     public function isCredentialsNonExpired()
     {
-        // TODO: Implement isCredentialsNonExpired() method.
+        return true;
     }
 
     /**
@@ -306,7 +295,7 @@ class User implements AdvancedUserInterface , \Serializable
      */
     public function isEnabled()
     {
-        // TODO: Implement isEnabled() method.
+        return $this->isactive;
     }
     /**
      * @var string
@@ -326,5 +315,53 @@ class User implements AdvancedUserInterface , \Serializable
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * The equality comparison should neither be done by referential equality
+     * nor by comparing identities (i.e. getId() === getId()).
+     *
+     * However, you do not need to compare every attribute, but only those that
+     * are relevant for assessing whether re-authentication is required.
+     *
+     * Also implementation should consider that $user instance may implement
+     * the extended user interface `AdvancedUserInterface`.
+     *
+     * @param UserInterface $user
+     *
+     * @return bool
+     */
+    public function isEqualTo(UserInterface $user)
+    {
+        return $this->id==$user->getId();
+    }
+    /**
+     * @var \SocialGamingBundle\Entity\Role
+     */
+    private $role;
+
+
+    /**
+     * Set role
+     *
+     * @param \SocialGamingBundle\Entity\Role $role
+     *
+     * @return User
+     */
+    public function setRole(\SocialGamingBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return \SocialGamingBundle\Entity\Role
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }
