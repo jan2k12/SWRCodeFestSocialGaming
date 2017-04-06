@@ -1,6 +1,8 @@
 social_gaming_login:
         path: /login
         defaults: { _controller: SocialGamingBundle:Security:login }
+logout:
+        path: /logout
 social_gaming_register:
         path: /frontend/register
         defaults: { _controller: SocialGamingBundle:Registration:register }

@@ -11,6 +11,7 @@ namespace SocialGamingBundle\Controller;
 
 use Monolog\Handler\LogEntriesHandler;
 use Monolog\Logger;
+use SocialGamingBundle\Entity\GameUser;
 use SocialGamingBundle\Entity\User;
 use SocialGamingBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,13 +21,15 @@ class RegistrationController extends Controller
 {
     public function registerAction(Request $request)
     {
-        $user = new User();
+        $user = new GameUser();
         $form=$this->createForm(UserType::class,$user);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             try{
             $password=$this->get('security.password_encoder')->encodePassword($user,$user->getPlainPassword());
             $user->setPassword($password);
+            $UserRoles=$this->getDoctrine()->getRepository('SocialGamingBundle:Role')->findBy(array('name'=>'ROLE_USER'));
+            $user->setRoles($UserRoles[0]);
             $em=$this->getDoctrine()->getEntityManager();
             $em->persist($user);
             $em->flush();

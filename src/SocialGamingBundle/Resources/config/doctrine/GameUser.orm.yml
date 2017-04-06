@@ -39,7 +39,6 @@ SocialGamingBundle\Entity\GameUser:
     oneToOne:
         roles:
             targetEntity: Role
-            inversedBy: gameUser
             joinColumn:
                 name: roleId
                 referencedColumnName: id
